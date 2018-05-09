@@ -6,10 +6,11 @@ def input_check():
 	val = input()
 	#if val.isdigit() and not np.isnan(int(val)):
 	if val.isdigit():
+		print(val)
 		return int(val)
 	else:
 		print("Not a number. Try again.")
-		input_check()
+		return input_check()
 		
 def custom_matrix():
 #	# take input from user in one row
@@ -34,7 +35,7 @@ def matrix_chooser():
 	a = input()
 	if a not in ['yes','no']:
 		print("Not a valid option. Try again.")
-		matrix_chooser()
+		return matrix_chooser()
 	elif a == 'yes':
 		custom_matrix()
 	else:

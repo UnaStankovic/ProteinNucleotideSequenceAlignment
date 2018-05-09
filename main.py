@@ -13,7 +13,7 @@ def alignment_chooser(opt):
 	a = input()
 	if a not in ["L","G", "l", "g"]:
 		print("Not a valid option. Try again.")
-		alignment_chooser(opt)
+		return alignment_chooser(opt)
 	elif a in ["G", "g"]:
 		if opt == '1':
 			global_alignment_nucleotide()
