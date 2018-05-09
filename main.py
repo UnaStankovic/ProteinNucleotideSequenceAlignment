@@ -4,12 +4,26 @@
 #2. Global and local alignments of protein sequences using PAM and BLOOSUM score matrices 
 #3. Alignment of protein or nucleotide sequences, depending on the type
 #4. Alignment of multiple sequences using CLUSTALW algorithm 
-import nekifajl
+import third, fourth 
+from first import global_alignment_nucleotide, local_alignment_nucleotide
+from second import global_alignment_protein, local_alignment_protein
 
-def alignment_chooser():
+def alignment_chooser(opt):
 	print("For global alignment type G, for local L:")
 	a = input()
-	return a
+	if a not in ["L","G", "l", "g"]:
+		print("Not a valid option. Try again.")
+		alignment_chooser(opt)
+	elif a in ["G", "g"]:
+		if opt == '1':
+			global_alignment_nucleotide()
+		else:
+			global_alignment_protein()
+	elif a in ["L","l"]:
+		if opt == '1':
+			local_alignment_nucleotide()
+		else:
+			local_alignment_protein()
 
 def option_chooser(opt):
 	valid = set(['1','2','3','4','5'])
@@ -17,9 +31,9 @@ def option_chooser(opt):
 		print("Not a valid option. Try again.")
 		screen()
 	elif opt == '1':
-		print("Option 1")
+		a = alignment_chooser(opt)
 	elif opt == '2':
-		print("Option 2")
+		a = alignment_chooser(opt)
 	elif opt == '3':
 		print("Option 3")
 	elif opt == '4':
@@ -38,7 +52,6 @@ def screen():
 	option_chooser(option)
 
 def main():
-	nekifajl.say_hi()
 	screen()
 	
 if __name__ == "__main__":
