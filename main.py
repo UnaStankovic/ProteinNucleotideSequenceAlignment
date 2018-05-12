@@ -21,7 +21,10 @@ def alignment_chooser(opt):
 			global_alignment_protein()
 	elif a in ["L","l"]:
 		if opt == '1':
-			local_alignment_nucleotide()
+			print("Unesite niske za racunanje poravnanja")
+			first = input()
+			second = input()
+			print(local_alignment_nucleotide(first, second))
 		else:
 			local_alignment_protein()
 

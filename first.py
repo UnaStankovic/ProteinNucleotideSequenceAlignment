@@ -43,6 +43,23 @@ def global_alignment_nucleotide():
 	matrix_chooser()
 	print("globalno 1")
 	
-def local_alignment_nucleotide():
-	matrix_chooser()
-	print("lokalno 1")
+def local_alignment_nucleotide(first, second):
+	#matrix_chooser()
+	local_alignment = [[0 for j in range(len(second) + 1)] for i in range(len(first) + 1)]
+	
+	for i in range(len(first) + 1):
+		local_alignment[i][0] = 0
+	for i in range(len(second) + 1):
+		local_alignment[0][i] = 0
+		
+	for i in range(1, len(first) +1):
+		for j in range(1, len(second) + 1):
+			local_alignment[i][j] = max(0, local_alignment[i-1][j] - 2, local_alignment[i][j-1] - 2, local_alignment[i-1][j-1] + int(first == second))
+	
+	maximum = 0
+	for i in range(len(local_alignment)):
+		for j in range(len(local_alignment[i])):
+			if local_alignment[i][j] > maximum:
+				maximum = local_alignment[i][j]
+	
+	return maximum
