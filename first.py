@@ -1,10 +1,8 @@
 #This file contains global and local alignments of nucleotide sequences using given matrix as a score matrix 
-#from six.moves import xrange
 import numpy as np
 
 def input_check():
 	val = input()
-	#if val.isdigit() and not np.isnan(int(val)):
 	if val.isdigit():
 		print(val)
 		return int(val)
