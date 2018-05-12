@@ -8,6 +8,14 @@ import third, fourth
 from first import global_alignment_nucleotide, local_alignment_nucleotide
 from second import global_alignment_protein, local_alignment_protein
 
+def sequence_input_check():
+	sequence = input()
+	for i in range(len(sequence)):
+		if sequence[i] not in {"A","C","G","T","a","c","g","t"}:
+			print("Not a valid sequence.Try again")
+			return sequence_input_check()
+	return sequence	
+
 def alignment_chooser(opt):
 	print("For global alignment type G, for local L:")
 	a = input()
@@ -22,8 +30,8 @@ def alignment_chooser(opt):
 	elif a in ["L","l"]:
 		if opt == '1':
 			print("Unesite niske za racunanje poravnanja")
-			first = input()
-			second = input()
+			first = sequence_input_check()
+			second = sequence_input_check()
 			print(local_alignment_nucleotide(first, second))
 		else:
 			local_alignment_protein()
