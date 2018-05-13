@@ -1,4 +1,11 @@
 #This file contains global and local alignments of nucleotide sequences using given matrix as a score matrix 
+#BLAST AND TTM MATRIX ARE GIVEN AS 
+#  A  T  C  G      A  T  C  G
+#A 5 -4 -4 -4    A 1 -5 -5 -1
+#T -4 5 -4 -4    T -5 1 -1 -5
+#C -4 -4 5 -4    C -5 -1 1 -5
+#G -4 -4 -4 5    G -1 -5 -5 1
+#  BLAST		   TTM MATRIX 
 import numpy as np
 
 def input_check():
@@ -25,35 +32,32 @@ def custom_matrix():
 		print(matrix)
 		for j in range(0,m):
 			matrix[i][j] = input_check()
-			print(matrix)
+	print(matrix)		
+	return matrix
+	
+def fill_matrix(n, m, t, param1, param2, param3):
+	matrix = np.zeros((n,m))
+	for i in range(n):
+		for j in range(m):
+			if i == j:
+				matrix[i][j] = param1
+			elif t.lower() == "ttm" and i + j == 3:
+				matrix[i][j] = param3
+			else: 
+				matrix[i][j] = param2
 	print(matrix)
-
+	return matrix 
+	
 def premade_score():
 	print("Do you want to use BLAST(B) or Transition-Transvertion Matrix(TTM)?")
 	m = input()
 	if m not in {"B","b", "TTM","ttm"}:
 		print("Not a valid option. Try again.")
 		return premade_score()
-	matrix = np.zeros((4,4))
-	print(matrix)
 	if m in {"B","b"}:
-		for i in range(4):
-			for j in range(4):
-				if i == j:
-					matrix[i][j] = 5
-				else:
-					matrix[i][j] = -4
+		return fill_matrix(4, 4, m, 5, -4, 0)
 	else:
-		for i in range(4):
-			for j in range(4):
-				if i == j:
-					matrix[i][j] = 1
-				elif i + j == 3:
-					matrix[i][j] = -1
-				else:
-					matrix[i][j] = -5
-	print(matrix)
-	return matrix 
+		return fill_matrix(4, 4, m, 1, -5, -1)
 	
 def matrix_chooser():
 	print("Do you want to use custom score matrix? yes/no")
@@ -68,14 +72,14 @@ def matrix_chooser():
 
 			
 def global_alignment_nucleotide(first, second):
-	matrix_chooser()
+	score_matrix = matrix_chooser()
 	match = 1
 	mismatch = -1
 	indel = -1
 	
 	
 def local_alignment_nucleotide(first, second):
-	matrix_chooser()
+	score_matrix = matrix_chooser()
 	local_alignment = [[0 for j in range(len(second) + 1)] for i in range(len(first) + 1)]
 	
 	for i in range(len(first) + 1):
