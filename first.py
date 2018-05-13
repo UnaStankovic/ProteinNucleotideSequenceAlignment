@@ -13,6 +13,9 @@ SCORE_MATRIX = np.zeros((10,10))
 GIVEN = False
 CUSTOM = False 
 
+G = False
+L = False 
+
 def input_check():
 	val = input()
 	v = val
@@ -24,6 +27,8 @@ def input_check():
 		
 def custom_matrix():
 	global SCORE_MATRIX
+	global CUSTOM
+	CUSTOM = True
 	print("Insert dimensions:")
 	n = input_check()
 	m = input_check()
@@ -79,6 +84,8 @@ def matrix_chooser():
 		return premade_score()	
 
 def match_mis_gap_chooser():
+	global G
+	global L 
 	print("Do you want to manually choose values for match, mismatch and gap? \
 		(If you've chosen to use BLAST or TTM matrix only gap value will be applied.)")
 	m = input()
@@ -92,17 +99,19 @@ def match_mis_gap_chooser():
 		mismatch = input_check()
 		print("Gap:")
 		gap = input_check()
-	else:
+	elif G == True:
 		match = 5
 		mismatch = -1
 		gap = -2
+	else:
+		match = 1
+		mismatch = -1
+		gap = -1
 	return match, mismatch, gap
 
 def match_score(c1, c2, m, mm):
 	global GIVEN
 	global SCORE_MATRIX
-	print(GIVEN)
-	print(SCORE_MATRIX)
 	if GIVEN:
 		mapped_values = {'A' : 0, 'a' : 0,
 						'T' : 1, 't' : 1,
@@ -110,9 +119,6 @@ def match_score(c1, c2, m, mm):
 						'G' : 3, 'g' : 3}
 		a = mapped_values[c1]
 		b = mapped_values[c2]
-		print(c1)
-		print(c2)
-		print("From score matrix " + str(SCORE_MATRIX[a][b]))
 		return SCORE_MATRIX[a][b]
 	elif c1 == c2:
 		return m
@@ -120,6 +126,8 @@ def match_score(c1, c2, m, mm):
 		return mm
 
 def global_alignment_nucleotide(first, second):
+	global G
+	G = True
 	matrix_chooser()
 	match, mismatch, gap = match_mis_gap_chooser()
 	
@@ -166,7 +174,10 @@ def global_alignment_nucleotide(first, second):
 	return s[n][m]
 		
 def local_alignment_nucleotide(first, second):
-	score_matrix = matrix_chooser()
+	global L 
+	L = True
+	matrix_chooser()
+	match, mismatch, gap = match_mis_gap_chooser()
 	local_alignment = [[0 for j in range(len(second) + 1)] for i in range(len(first) + 1)]
 	
 	for i in range(len(first) + 1):
@@ -176,8 +187,12 @@ def local_alignment_nucleotide(first, second):
 		
 	for i in range(1, len(first) +1):
 		for j in range(1, len(second) + 1):
-			local_alignment[i][j] = max(0, local_alignment[i-1][j] - 2, local_alignment[i][j-1] - 2, \
-										local_alignment[i-1][j-1] + int(first == second))
+			matcher = match_score(first[i-1], second[j-1], match, mismatch)
+			if matcher < 0:
+				matcher = 0
+			local_alignment[i][j] = max(0, local_alignment[i-1][j] + gap, local_alignment[i][j-1] + gap, \
+										local_alignment[i-1][j-1] + matcher)
+										#local_alignment[i-1][j-1] + int(first == second))
 	
 	maximum = 0
 	for i in range(len(local_alignment)):
