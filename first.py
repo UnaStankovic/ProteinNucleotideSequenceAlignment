@@ -73,24 +73,74 @@ def matrix_chooser():
 def match_mis_gap_chooser():
 	print("Do you want to manually choose values for match, mismatch and gap?")
 	m = input()
-	if m not in {"yes","y","no","n"}
+	if m not in {"yes","y","no","n"}:
 		print("Invalid answer.Try again.")
 		return match_mis_gap_chooser()
 	elif m in {"yes","y"}:
+		print("Match:")
 		match = input_check()
+		print("Mismatch:")
 		mismatch = input_check()
+		print("Gap:")
 		gap = input_check()
 	else:
 		match = 5
 		mismatch = -1
 		gap = -2
 	return match, mismatch, gap
-	
+
+def match_score(c1, c2, m, mm):
+	if c1 == c2:
+		return m
+	else: 
+		return mm
+
 def global_alignment_nucleotide(first, second):
-	score_matrix = matrix_chooser()
+	#score_matrix = matrix_chooser()
 	match, mismatch, gap = match_mis_gap_chooser()
 	
+	n = len(first)
+	m = len(second)
+	backtrack = [[(-1,1) for j in range(m+1)] for i in range(n+1)]
+	s = [[0 for j in range(m+1)] for i in range(n+1)]
 	
+	for i in range(1, n+1):
+		s[i][0] = s[i-1][0] + gap 
+		backtrack[i][0] = (i-1, 0)
+	for j in range(1, m+1):
+		s[0][j] = s[0][j-1] + gap
+		backtrack[0][j] = (0, j-1)
+		
+	for i in range(1, n+1):
+		for j in range(1, m+1):
+			s[i][j] = max(s[i-1][j] + gap, s[i][j-1] + gap, s[i-1][j-1] + match_score(first[i-1], second[j-1], match, mismatch))
+			if s[i][j] == s[i-1][j] + gap:
+				backtrack[i][j] = (i-1, j)
+			elif s[i][j] == s[i][j-1] + gap:
+				backtrack[i][j] = (i, j-1)
+			else:
+				backtrack[i][j] =  (i-1, j-1)
+	
+	first_p = ""
+	second_p = ""
+	i = n
+	j = m
+	while (i,j) != (0,0):
+		if backtrack[i][j] == (i-1, j-1):
+			first_p = first[i-1] + first_p
+			second_p = second[j-1] + second_p
+		elif backtrack[i][j] == (i-1, j):
+			first_p = first[i-1] + first_p
+			second_p = '-' + second_p
+		else:
+			first_p = '-' + first_p
+			second_p = second[j-1] + second_p
+		(i, j) = backtrack[i][j]
+	
+	print(first_p)
+	print(second_p)
+	return s[n][m]
+		
 def local_alignment_nucleotide(first, second):
 	score_matrix = matrix_chooser()
 	local_alignment = [[0 for j in range(len(second) + 1)] for i in range(len(first) + 1)]
