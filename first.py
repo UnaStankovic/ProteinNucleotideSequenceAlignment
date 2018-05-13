@@ -70,12 +70,25 @@ def matrix_chooser():
 	else:
 		return premade_score()	
 
-			
+def match_mis_gap_chooser():
+	print("Do you want to manually choose values for match, mismatch and gap?")
+	m = input()
+	if m not in {"yes","y","no","n"}
+		print("Invalid answer.Try again.")
+		return match_mis_gap_chooser()
+	elif m in {"yes","y"}:
+		match = input_check()
+		mismatch = input_check()
+		gap = input_check()
+	else:
+		match = 5
+		mismatch = -1
+		gap = -2
+	return match, mismatch, gap
+	
 def global_alignment_nucleotide(first, second):
 	score_matrix = matrix_chooser()
-	match = 1
-	mismatch = -1
-	indel = -1
+	match, mismatch, gap = match_mis_gap_chooser()
 	
 	
 def local_alignment_nucleotide(first, second):
