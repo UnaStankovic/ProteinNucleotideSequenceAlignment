@@ -10,9 +10,9 @@ import numpy as np
 
 #not a fan of global variables but these are necessary
 SCORE_MATRIX = np.zeros((10,10))
-BLAST = False
-TTM = False
+GIVEN = False
 CUSTOM = False 
+
 def input_check():
 	val = input()
 	v = val
@@ -23,6 +23,7 @@ def input_check():
 		return input_check()
 		
 def custom_matrix():
+	global SCORE_MATRIX
 	print("Insert dimensions:")
 	n = input_check()
 	m = input_check()
@@ -34,9 +35,13 @@ def custom_matrix():
 			SCORE_MATRIX[i][j] = input_check()
 	print("Custom matrix:")
 	print(SCORE_MATRIX)
+	return SCORE_MATRIX
 	
 def fill_matrix(n, m, t, param1, param2, param3):
+	global GIVEN
+	global SCORE_MATRIX
 	SCORE_MATRIX = np.zeros((n,m))
+	GIVEN = True
 	for i in range(n):
 		for j in range(m):
 			if i == j:
@@ -47,14 +52,17 @@ def fill_matrix(n, m, t, param1, param2, param3):
 				SCORE_MATRIX[i][j] = param2
 	print("Score matrix (" + t +"):")
 	print(SCORE_MATRIX)
+	return SCORE_MATRIX
 	
 def premade_score():
-	print("Do you want to use BLAST(B) or Transition-Transvertion Matrix(TTM)?")
+	print("Do you want to use BLAST(B), Transition-Transvertion Matrix(TTM) or none?")
 	m = input()
-	if m not in {"B","b", "TTM","ttm"}:
+	if m not in {"B","b", "TTM","ttm", "no", "n"}:
 		print("Not a valid option. Try again.")
 		return premade_score()
-	if m in {"B","b"}:
+	elif m in {"no", "n"}:
+		return 
+	elif m in {"B","b"}:
 		return fill_matrix(4, 4, m, 5, -4, 0)
 	else:
 		return fill_matrix(4, 4, m, 1, -5, -1)
@@ -91,13 +99,28 @@ def match_mis_gap_chooser():
 	return match, mismatch, gap
 
 def match_score(c1, c2, m, mm):
-	if c1 == c2:
+	global GIVEN
+	global SCORE_MATRIX
+	print(GIVEN)
+	print(SCORE_MATRIX)
+	if GIVEN:
+		mapped_values = {'A' : 0, 'a' : 0,
+						'T' : 1, 't' : 1,
+						'C' : 2, 'c' : 2,
+						'G' : 3, 'g' : 3}
+		a = mapped_values[c1]
+		b = mapped_values[c2]
+		print(c1)
+		print(c2)
+		print("From score matrix " + str(SCORE_MATRIX[a][b]))
+		return SCORE_MATRIX[a][b]
+	elif c1 == c2:
 		return m
 	else: 
 		return mm
 
 def global_alignment_nucleotide(first, second):
-	#score_matrix = matrix_chooser()
+	matrix_chooser()
 	match, mismatch, gap = match_mis_gap_chooser()
 	
 	n = len(first)
