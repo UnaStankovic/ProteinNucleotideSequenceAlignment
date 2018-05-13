@@ -11,7 +11,7 @@ import numpy as np
 def input_check():
 	val = input()
 	if val.isdigit():
-		print(val)
+		#print(val)
 		return int(val)
 	else:
 		print("Not a number. Try again.")
@@ -66,9 +66,9 @@ def matrix_chooser():
 		print("Not a valid option. Try again.")
 		return matrix_chooser()
 	elif a == 'yes':
-		custom_matrix()
+		return custom_matrix()
 	else:
-		premade_score()	
+		return premade_score()	
 
 			
 def global_alignment_nucleotide(first, second):
