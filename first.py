@@ -54,12 +54,16 @@ def local_alignment_nucleotide(first, second):
 		
 	for i in range(1, len(first) +1):
 		for j in range(1, len(second) + 1):
-			local_alignment[i][j] = max(0, local_alignment[i-1][j] - 2, local_alignment[i][j-1] - 2, local_alignment[i-1][j-1] + int(first == second))
+			local_alignment[i][j] = max(0, local_alignment[i-1][j] - 2, local_alignment[i][j-1] - 2, \
+										local_alignment[i-1][j-1] + int(first == second))
 	
 	maximum = 0
 	for i in range(len(local_alignment)):
 		for j in range(len(local_alignment[i])):
 			if local_alignment[i][j] > maximum:
 				maximum = local_alignment[i][j]
+	
+	for i in range(len(local_alignment)):
+		print(local_alignment[i])
 	
 	return maximum
