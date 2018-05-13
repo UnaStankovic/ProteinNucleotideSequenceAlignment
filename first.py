@@ -8,6 +8,11 @@
 #  BLAST		   TTM MATRIX 
 import numpy as np
 
+#not a fan of global variables but these are necessary
+SCORE_MATRIX = np.zeros((10,10))
+BLAST = False
+TTM = False
+CUSTOM = False 
 def input_check():
 	val = input()
 	v = val
@@ -18,35 +23,30 @@ def input_check():
 		return input_check()
 		
 def custom_matrix():
-#	# take input from user in one row
-#	nn_matrix = input().split()
-#	total_cells =  len(nn_matrix)
-#	row_cells = int(total_cells**0.5)
-#	matrix = [nn_matrix[i:i+row_cells] for i in xrange(0, total_cells, row_cells)]
 	print("Insert dimensions:")
 	n = input_check()
 	m = input_check()
 	print("Insert matrix:")
-	matrix = np.zeros((n,m))
+	SCORE_MATRIX = np.zeros((n,m))
 	for i in range(0,n):
-		print(matrix)
+		print(SCORE_MATRIX)
 		for j in range(0,m):
-			matrix[i][j] = input_check()
-	print(matrix)		
-	return matrix
+			SCORE_MATRIX[i][j] = input_check()
+	print("Custom matrix:")
+	print(SCORE_MATRIX)
 	
 def fill_matrix(n, m, t, param1, param2, param3):
-	matrix = np.zeros((n,m))
+	SCORE_MATRIX = np.zeros((n,m))
 	for i in range(n):
 		for j in range(m):
 			if i == j:
-				matrix[i][j] = param1
+				SCORE_MATRIX[i][j] = param1
 			elif t.lower() == "ttm" and i + j == 3:
-				matrix[i][j] = param3
+				SCORE_MATRIX[i][j] = param3
 			else: 
-				matrix[i][j] = param2
-	print(matrix)
-	return matrix 
+				SCORE_MATRIX[i][j] = param2
+	print("Score matrix (" + t +"):")
+	print(SCORE_MATRIX)
 	
 def premade_score():
 	print("Do you want to use BLAST(B) or Transition-Transvertion Matrix(TTM)?")
@@ -71,7 +71,8 @@ def matrix_chooser():
 		return premade_score()	
 
 def match_mis_gap_chooser():
-	print("Do you want to manually choose values for match, mismatch and gap?")
+	print("Do you want to manually choose values for match, mismatch and gap? \
+		(If you've chosen to use BLAST or TTM matrix only gap value will be applied.)")
 	m = input()
 	if m not in {"yes","y","no","n"}:
 		print("Invalid answer.Try again.")
@@ -161,6 +162,7 @@ def local_alignment_nucleotide(first, second):
 			if local_alignment[i][j] > maximum:
 				maximum = local_alignment[i][j]
 	
+	print("Local alignment:")
 	for i in range(len(local_alignment)):
 		print(local_alignment[i])
 	
