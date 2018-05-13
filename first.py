@@ -10,8 +10,8 @@ import numpy as np
 
 def input_check():
 	val = input()
-	if val.isdigit():
-		#print(val)
+	v = val
+	if v.lstrip('-').isdigit():
 		return int(val)
 	else:
 		print("Not a number. Try again.")
