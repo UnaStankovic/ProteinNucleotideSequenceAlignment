@@ -28,6 +28,33 @@ def custom_matrix():
 			print(matrix)
 	print(matrix)
 
+def premade_score():
+	print("Do you want to use BLAST(B) or Transition-Transvertion Matrix(TTM)?")
+	m = input()
+	if m not in {"B","b", "TTM","ttm"}:
+		print("Not a valid option. Try again.")
+		return premade_score()
+	matrix = np.zeros((4,4))
+	print(matrix)
+	if m in {"B","b"}:
+		for i in range(4):
+			for j in range(4):
+				if i == j:
+					matrix[i][j] = 5
+				else:
+					matrix[i][j] = -4
+	else:
+		for i in range(4):
+			for j in range(4):
+				if i == j:
+					matrix[i][j] = 1
+				elif i + j == 3:
+					matrix[i][j] = -1
+				else:
+					matrix[i][j] = -5
+	print(matrix)
+	return matrix 
+	
 def matrix_chooser():
 	print("Do you want to use custom score matrix? yes/no")
 	a = input()
@@ -39,12 +66,16 @@ def matrix_chooser():
 	else:
 		premade_score()	
 
-def global_alignment_nucleotide():
+			
+def global_alignment_nucleotide(first, second):
 	matrix_chooser()
-	print("globalno 1")
+	match = 1
+	mismatch = -1
+	indel = -1
+	
 	
 def local_alignment_nucleotide(first, second):
-	#matrix_chooser()
+	matrix_chooser()
 	local_alignment = [[0 for j in range(len(second) + 1)] for i in range(len(first) + 1)]
 	
 	for i in range(len(first) + 1):
