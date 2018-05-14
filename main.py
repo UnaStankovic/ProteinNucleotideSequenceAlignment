@@ -49,7 +49,7 @@ def alignment_chooser(opt):
 		return alignment_chooser(opt)
 	elif a in ["G", "g"]:
 		if opt == '1':
-			print("Unesite niske za racunanje poravnanja")
+			print("Insert sequences for alignment:")
 			first = sequence_input_check()
 			second = sequence_input_check()
 			print(global_alignment_nucleotide(first, second))
@@ -57,7 +57,7 @@ def alignment_chooser(opt):
 			global_alignment_protein()
 	elif a in ["L","l"]:
 		if opt == '1':
-			print("Unesite niske za racunanje poravnanja")
+			print("Insert sequences for alignment:")
 			first = sequence_input_check()
 			second = sequence_input_check()
 			print(local_alignment_nucleotide(first, second))

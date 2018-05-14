@@ -3,7 +3,8 @@
 # BLOSUM score alignment between evolutionarily-divergent proteins, refers to percent identity  
 #PAM High number: compares distantly related proteins 
 #BLOSUM High number : compares closely related proteins 
-#PAM250
+#TODO :PAM250																						 Blosum 45
+#TODO: Custom reading: dim, letter array and values
 # 	 G  A  V  L  I  P  S  T  D  E  N  Q  K  R  H  F  Y  W  M  C  B  Z  X  
 # G  5
 # A  1  2

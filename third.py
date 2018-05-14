@@ -85,6 +85,9 @@ def rna_to_aa(rna):
 	    "GGU":"G", "GGC":"G", "GGA":"G", "GGG":"G"}
 		
 	start = rna.find('AUG')
+	if start == -1:
+		print("Invalid sequence.")
+		exit()
 	protein_sequence = ""
 	while start + 2 < len(rna):
 		codon = rna[start:start+3]

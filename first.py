@@ -6,6 +6,7 @@
 #C -4 -4 5 -4    C -5 -1 1 -5
 #G -4 -4 -4 5    G -1 -5 -5 1
 #  BLAST		   TTM MATRIX 
+#TODO : Add custom matrix input format for nucleotide and protein 
 import numpy as np
 
 #not a fan of global variables but these are necessary
