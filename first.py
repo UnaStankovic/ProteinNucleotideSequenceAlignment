@@ -124,7 +124,7 @@ def match_score(c1, c2, m, mm):
 		return m
 	else: 
 		return mm
-
+			
 def global_alignment_nucleotide(first, second):
 	global G
 	G = True

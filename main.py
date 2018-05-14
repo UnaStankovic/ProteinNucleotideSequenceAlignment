@@ -37,17 +37,17 @@ def alignment_chooser(opt):
 			second = sequence_input_check()
 			print(local_alignment_nucleotide(first, second))
 		else:
-			local_alignment_protein()
+			print(local_alignment_protein())
 
 def option_chooser(opt):
 	valid = set(['1','2','3','4','5'])
 	if opt not in valid:
 		print("Not a valid option. Try again.")
-		screen()
+		return screen()
 	elif opt == '1':
-		a = alignment_chooser(opt)
+		return alignment_chooser(opt)
 	elif opt == '2':
-		a = alignment_chooser(opt)
+		return alignment_chooser(opt)
 	elif opt == '3':
 		print("Option 3")
 	elif opt == '4':
