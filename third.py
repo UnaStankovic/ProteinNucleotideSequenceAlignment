@@ -6,17 +6,21 @@
 
 
 #DNA to RNA
-def dna_to_rna():
-	dna = open('dna.txt', 'r')
-	content = dna.read()
-	content = content.replace('\n','')
-	content = content.replace('T','U')
-	rna = open('rna.txt', 'w')
-	rna.write(sadrzaj)
-	print("DNA to RNA transcription completed.")
+def dna_to_rna(dna):
+	if dna.find(".txt") != -1:
+		dna = open('dna.txt', 'r')
+		content = dna.read()
+		content = content.replace('\n','')
+		content = content.replace('T','U')
+		rna = open('rna.txt', 'w')
+		rna.write(sadrzaj)
+		print("DNA to RNA transcription completed.")
+	else:
+		rna = dna.replace('T','U')
+	return rna_to_aa(rna)
 
 #RNK to AA
-def rna_to_aa():
+def rna_to_aa(rna):
 	map = {"UUU":"F", "UUC":"F", "UUA":"L", "UUG":"L",
 	    "UCU":"S", "UCC":"S", "UCA":"S", "UCG":"S",
 	    "UAU":"Y", "UAC":"Y", "UAA":"STOP", "UAG":"STOP",
@@ -33,16 +37,20 @@ def rna_to_aa():
 	    "GCU":"A", "GCC":"A", "GCA":"A", "GCG":"A",
 	    "GAU":"D", "GAC":"D", "GAA":"E", "GAG":"E",
 	    "GGU":"G", "GGC":"G", "GGA":"G", "GGG":"G"}
-	
-	rna = open('rna.txt', 'r')
-	RNA = rna.read()
+		
+	if rna.find('.txt') != -1:
+		rna = open('rna.txt', 'r')
+		RNA = rna.read()
+	else:
+		RNA = rna
+		
 	start = RNA.find('AUG')
 	protein_sequence = ""
 
 	while start + 2 < len(RNA):
-	    codon = RNA[start:start+3]
-	    if map[codon] == "STOP":
-	        break;
-	    protein_sequence += map[codon]
-	    start += 3
-	print(protein_sequence)
+		codon = RNA[start:start+3]
+		if map[codon] == "STOP":
+			break;
+		protein_sequence += map[codon]
+		start += 3
+	print(protein_sequence)	
