@@ -4,7 +4,8 @@
 #PAM High number: compares distantly related proteins 
 #BLOSUM High number : compares closely related proteins 
 #TODO :PAM250																						 Blosum 45
-#TODO: Custom reading: dim, letter array and values
+#TODO: Add to upper everywhere 
+#TODO: fix letter reading - spaces, newlines - regex
 # 	 G  A  V  L  I  P  S  T  D  E  N  Q  K  R  H  F  Y  W  M  C  B  Z  X  
 # G  5
 # A  1  2
@@ -33,12 +34,37 @@
 # 	 G  A  V  L  I  P  S  T  D  E  N  Q  K  R  H  F  Y   W  M  C  B  Z   X
 import numpy as np 
 
+global score_matrix 
+score_matrix = np.zeros((10,10))
+global GIVEN2 
+GIVEN2 = False
+
+def match_score(c1, c2, m, mm, letters):
+	global GIVEN2
+	global score_matrix
+	GIVEN2 = True
+	mapped_values = {}
+	if GIVEN2:
+		for i, v in enumerate(letters):
+			print(i,v)
+			mapped_values[v] = i
+		print(mapped_values)
+		a = mapped_values[c1]
+		b = mapped_values[c2]
+		return score_matrix[a][b]
+	elif c1 == c2:
+		return m
+	else: 
+		return mm
+			
+
 def given_matrices_inserter(filename):
 	try:	
 		data = open(filename, 'r')
 		dimensions = data.readline()
 		n = int(dimensions)
 		letters = data.readline()
+		global score_matrix
 		score_matrix = np.zeros((n,n))
 		for i in range(0,n):
 			arr = data.readline().split(" ")
@@ -46,12 +72,16 @@ def given_matrices_inserter(filename):
 				score_matrix[i][j] = arr[j]
 		print("filename matrix:")
 		print(score_matrix)
-		return score_matrix, letters 
+		letters = letters.replace('\n', '')
+		letters_arr = letters.split(' ')
+		print(letters_arr)
+		return letters_arr 
 	except FileNotFoundError:
 		print("There is no matrix file.")
 		exit()
 		
-def global_alignment_protein(first, second):
+def global_alignment_protein(first, second, letters):
+	match_score("A", "G", 5, 10, letters)
 	print("globalno 1")
 	
 def local_alignment_protein(first, second):
