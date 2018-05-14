@@ -8,6 +8,31 @@ import third, fourth
 from first import global_alignment_nucleotide, local_alignment_nucleotide
 from second import global_alignment_protein, local_alignment_protein
 
+def sequence_chooser():
+	print("Enter 1 for a file name or 2 for DNA/protein sequence:")
+	a = input()
+	if a not in {"1","2"}:
+		print("Not a valid option.Try again.")
+		return sequence_chooser()
+	elif a == "1":
+		print("Enter file name:")
+		#try:
+		#	data = input()
+		#except FileNotFoundError:
+		#	print("File does not exist. Try again.")
+		#	return sequence_chooser()
+		data = input()
+		if(data.find('.txt') == -1):
+			print("Not a valid option. Try again.")
+			return sequence_chooser()
+		else:
+			return data
+	else:
+		print("Insert sequence:")
+		#info = sequence_input_check()
+		sequence = input()
+		return sequence 
+
 def sequence_input_check():
 	sequence = input()
 	for i in range(len(sequence)):
@@ -48,26 +73,9 @@ def option_chooser(opt):
 		return alignment_chooser(opt)
 	elif opt == '3':
 		print("Option 3")
-		print("Enter 1 for a file name or 2 for DNA/protein sequence:")
-		a = input()
-		if a not in {"1","2"}:
-			print("Not a valid option.Try again.")
-			return option_chooser(opt)
-		elif a == "1":
-			print("Enter file name:")
-			info = input()
-			if(info.find('.txt') == -1):
-				print("Not a valid option. Try again.")
-				return option_chooser(opt)
-		else:
-			print("Insert sequence:")
-			#info = sequence_input_check()
-			pn = input()
-			info = third.protein_or_nucleotide(pn)
-			if info == -1:
-				print("Program will be exited.")
-				exit()
-		return third.dna_to_rna(info)
+		first = sequence_chooser()
+		second = sequence_chooser()
+		return third.protein_nucleotide_alignment(first, second)
 	elif opt == '4':
 		print("Option 4")
 	else:

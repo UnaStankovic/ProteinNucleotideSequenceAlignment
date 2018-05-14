@@ -4,38 +4,69 @@
 #Thirdly, codons are translated into aminoacids. 
 #Finally, protein sequences are aligned. 
 
+def file_opener(filename):
+	try:	
+		dna = open(filename, 'r')
+		content = dna.read()
+		content = content.replace('\n','')
+		return content
+	except FileNotFoundError:
+		print("The file does not exist.")
+		exit()
+
+def rna_file_writer(content):
+	print("Do you want to have RNA info written in a file?")
+	answer = input()
+	if answer not in ["Yes","y", "yes", "No", "n", "no"]:
+		print("Not a valid answer. Try again.")
+		return rna_file_writer(content)
+	elif answer in ["Yes","y", "yes"]:
+		print("Insert file name:")
+		filename = input()
+		filename.append(".txt")
+		print(filename)
+		rna = open(filename, 'w')
+		rna.write(content)
+		print("Writing in " + filename + "successfully finished.")
+		return
+	else:
+		return
+
+def protein_nucleotide_alignment(first, second):
+	first = protein_or_nucleotide(first)
+	second = protein_or_nucleotide(second)
+	if first == -1 and second == -1:
+		print("Both proteins.")
+	else:
+		print(first)
+		print(second)
+
 def protein_or_nucleotide(sequence):
 	p = 0
+	if sequence.find('.txt') != -1:
+		data = file_opener(sequence)
+		return protein_or_nucleotide(data)
 	for i in range(len(sequence)):
 		if sequence[i] in {"A","C","G","T","a","c","g","t"}:
 			p += 1
 	if p == len(sequence):
+		print("Sequence1 : " + sequence)
 		print("Nucleotide. It will be translated into aminoacid.")
-		return sequence
+		return dna_to_rna(sequence)
 	else:
+		print("Sequence2 : " + sequence)
 		print("Protein.")
 		return -1
-		
+				
 #DNA to RNA
 def dna_to_rna(dna):
-	if dna.find(".txt") != -1:
-		try:
-			dna = open('dna.txt', 'r')
-		except FileNotFoundError:
-			print("The file does not exist.")
-			exit()
-		content = dna.read()
-		content = content.replace('\n','')
-		content = content.replace('T','U')
-		rna = open(dna, 'w')
-		rna.write(content)
-		print("DNA to RNA transcription completed.")
-	else:
-		rna = dna.replace('T','U')
-	return rna_to_aa(rna)
+	content = dna.replace('T','U')
+	rna_file_writer(content)
+	print("DNA to RNA transcription completed.")
+	return rna_to_aa(content)
 
 #RNK to AA
-def rna_to_aa(drna):
+def rna_to_aa(rna):
 	map = {"UUU":"F", "UUC":"F", "UUA":"L", "UUG":"L",
 	    "UCU":"S", "UCC":"S", "UCA":"S", "UCG":"S",
 	    "UAU":"Y", "UAC":"Y", "UAA":"STOP", "UAG":"STOP",
@@ -53,20 +84,10 @@ def rna_to_aa(drna):
 	    "GAU":"D", "GAC":"D", "GAA":"E", "GAG":"E",
 	    "GGU":"G", "GGC":"G", "GGA":"G", "GGG":"G"}
 		
-	if rna.find('.txt') != -1:
-		try:
-			rna = open(drna, 'r')
-			RNA = rna.read()
-		except FileNotFoundError:
-			print("The file does not exist.")
-			exit()
-	else:
-		RNA = rna
-		
-	start = RNA.find('AUG')
+	start = rna.find('AUG')
 	protein_sequence = ""
-	while start + 2 < len(RNA):
-		codon = RNA[start:start+3]
+	while start + 2 < len(rna):
+		codon = rna[start:start+3]
 		if map[codon] == "STOP":
 			break;
 		protein_sequence += map[codon]
