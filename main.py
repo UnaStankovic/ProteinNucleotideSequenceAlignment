@@ -44,9 +44,7 @@ def option_chooser(opt):
 	if opt not in valid:
 		print("Not a valid option. Try again.")
 		return screen()
-	elif opt == '1':
-		return alignment_chooser(opt)
-	elif opt == '2':
+	elif opt in ["1","2"]:
 		return alignment_chooser(opt)
 	elif opt == '3':
 		print("Option 3")
@@ -63,7 +61,7 @@ def screen():
 		4. Alignment of multiple sequences using CLUSTALW algorithm \n \
 		5. Exit program")
 	option = input()
-	option_chooser(option)
+	return option_chooser(option)
 
 def main():
 	screen()
