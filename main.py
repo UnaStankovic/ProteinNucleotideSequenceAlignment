@@ -48,7 +48,7 @@ def option_chooser(opt):
 		return alignment_chooser(opt)
 	elif opt == '3':
 		print("Option 3")
-		print("Enter 1 for a file name or 2 for DNA sequence:")
+		print("Enter 1 for a file name or 2 for DNA/protein sequence:")
 		a = input()
 		if a not in {"1","2"}:
 			print("Not a valid option.Try again.")
@@ -56,12 +56,17 @@ def option_chooser(opt):
 		elif a == "1":
 			print("Enter file name:")
 			info = input()
-			if(input.find('.txt') == -1):
+			if(info.find('.txt') == -1):
 				print("Not a valid option. Try again.")
 				return option_chooser(opt)
 		else:
 			print("Insert sequence:")
-			info = sequence_input_check()
+			#info = sequence_input_check()
+			pn = input()
+			info = third.protein_or_nucleotide(pn)
+			if info == -1:
+				print("Program will be exited.")
+				exit()
 		return third.dna_to_rna(info)
 	elif opt == '4':
 		print("Option 4")
