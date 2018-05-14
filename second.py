@@ -31,8 +31,28 @@
 # X -1  0 -1 -1 -1 -1  0  0 -1 -1  0 -1 -1 -1 -1 -2 -2  -4 -1 -3  -1 -1 -1
 #   -8 -8 -8 -8 -8 -8 -8 -8 -8 -8 -8 -8 -8 -8 -8 -8 -8  -8 -8 -8  -8 -8 -8  1 
 # 	 G  A  V  L  I  P  S  T  D  E  N  Q  K  R  H  F  Y   W  M  C  B  Z   X
-def global_alignment_protein():
+import numpy as np 
+
+def given_matrices_inserter(filename):
+	try:	
+		data = open(filename, 'r')
+		dimensions = data.readline()
+		n = int(dimensions)
+		letters = data.readline()
+		score_matrix = np.zeros((n,n))
+		for i in range(0,n):
+			arr = data.readline().split(" ")
+			for j in range(0,n):
+				score_matrix[i][j] = arr[j]
+		print("filename matrix:")
+		print(score_matrix)
+		return score_matrix, letters 
+	except FileNotFoundError:
+		print("There is no matrix file.")
+		exit()
+		
+def global_alignment_protein(first, second):
 	print("globalno 1")
 	
-def local_alignment_protein():
+def local_alignment_protein(first, second):
 	print("lokalno 1")
