@@ -75,3 +75,31 @@ def sequence_input_check(allowed):
 			return sequence_input_check(allowed)
 	return sequence
 		
+#FILE OPENERS - WRITERS
+def file_opener(filename):
+	try:	
+		dna = open(filename, 'r')
+		content = dna.read()
+		content = content.replace('\n','')
+		return content
+	except FileNotFoundError:
+		print("The file does not exist.")
+		exit()
+
+def rna_file_writer(content):
+	print("Do you want to have RNA info written in a file?")
+	answer = input()
+	if answer not in ["Yes","y", "yes", "No", "n", "no"]:
+		print("Not a valid answer. Try again.")
+		return rna_file_writer(content)
+	elif answer in ["Yes","y", "yes"]:
+		print("Insert file name:")
+		filename = input()
+		filename.append(".txt")
+		print(filename)
+		rna = open(filename, 'w')
+		rna.write(content)
+		print("Writing in " + filename + "successfully finished.")
+		return
+	else:
+		return

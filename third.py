@@ -3,34 +3,7 @@
 #Secondly, from nucleotide sequences we extract potential coding subsequence (from START to STOP codon). 
 #Thirdly, codons are translated into aminoacids. 
 #Finally, protein sequences are aligned. 
-
-def file_opener(filename):
-	try:	
-		dna = open(filename, 'r')
-		content = dna.read()
-		content = content.replace('\n','')
-		return content
-	except FileNotFoundError:
-		print("The file does not exist.")
-		exit()
-
-def rna_file_writer(content):
-	print("Do you want to have RNA info written in a file?")
-	answer = input()
-	if answer not in ["Yes","y", "yes", "No", "n", "no"]:
-		print("Not a valid answer. Try again.")
-		return rna_file_writer(content)
-	elif answer in ["Yes","y", "yes"]:
-		print("Insert file name:")
-		filename = input()
-		filename.append(".txt")
-		print(filename)
-		rna = open(filename, 'w')
-		rna.write(content)
-		print("Writing in " + filename + "successfully finished.")
-		return
-	else:
-		return
+from utilities import file_opener, rna_file_writer
 
 def protein_nucleotide_alignment(first, second):
 	first = protein_or_nucleotide(first)

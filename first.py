@@ -35,7 +35,7 @@ from second import match_score
 #	else: 
 #		return mm
 			
-def global_alignment_nucleotide(first, second):
+def global_alignment_nucleotide(first, second, letters):
 	global G
 	G = True
 	matrix_chooser()
@@ -84,7 +84,7 @@ def global_alignment_nucleotide(first, second):
 	print(second_p)
 	return s[n][m]
 		
-def local_alignment_nucleotide(first, second):
+def local_alignment_nucleotide(first, second, letters):
 	global L 
 	L = True
 	matrix_chooser()

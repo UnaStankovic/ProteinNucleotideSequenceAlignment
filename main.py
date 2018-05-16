@@ -4,13 +4,15 @@
 #2. Global and local alignments of protein sequences using PAM and BLOSUM score matrices 
 #3. Alignment of protein and nucleotide sequences, depending on the type
 #4. Alignment of multiple sequences using CLUSTALW algorithm 
-import first, second, third, fourth, utilities
+#list of files with functions:
 #from first import global_alignment_nucleotide, local_alignment_nucleotide
 #from second import global_alignment_protein, local_alignment_protein, given_matrices_inserter
 #from utilities import sequence_chooser, file_chooser, sequence_input_check, protein_sequence_input_check
-import numpy as np
-from screens import screen, option_chooser, alignment_chooser
+#from screens import screen, option_chooser, alignment_chooser
 
+import first, second, third, fourth, utilities
+from screens import screen
+import numpy as np
 SCORE_MATRIX = np.zeros((10,10))
 score_matrix = np.zeros((10,10))
 GIVEN = False

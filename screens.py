@@ -16,9 +16,9 @@ def alignment_chooser(opt):
 		first = sequence_input_check(letters)
 		second = sequence_input_check(letters)
 		if a in ["G", "g"]:
-			print(global_alignment_nucleotide(first, second))
+			print(global_alignment_nucleotide(first, second, letters))
 		else:
-			print(local_alignment_nucleotide(first, second))
+			print(local_alignment_nucleotide(first, second, letters))
 	elif opt == '2':
 		letters = given_matrices_inserter(file_chooser())
 		print("Insert sequences for alignment:")
@@ -27,7 +27,7 @@ def alignment_chooser(opt):
 		if a in ["G", "g"]:
 			print(global_alignment_protein(first, second, letters))
 		else:
-			print(local_alignment_protein(first, second))  
+			print(local_alignment_protein(first, second, letters))  
 
 
 def option_chooser(opt):
