@@ -1,5 +1,5 @@
 #This file contains option choosers and other screen settings
-from utilities import sequence_chooser, file_chooser, sequence_input_check, protein_sequence_input_check
+from utilities import sequence_chooser, file_chooser, sequence_input_check
 from first import global_alignment_nucleotide, local_alignment_nucleotide
 from second import global_alignment_protein, local_alignment_protein, given_matrices_inserter
 from third import protein_nucleotide_alignment
@@ -12,8 +12,9 @@ def alignment_chooser(opt):
 		return alignment_chooser(opt)
 	if opt == '1':
 		print("Insert sequences for alignment:")
-		first = sequence_input_check()
-		second = sequence_input_check()
+		letters = ['A','C','T','G']
+		first = sequence_input_check(letters)
+		second = sequence_input_check(letters)
 		if a in ["G", "g"]:
 			print(global_alignment_nucleotide(first, second))
 		else:
@@ -21,8 +22,8 @@ def alignment_chooser(opt):
 	elif opt == '2':
 		letters = given_matrices_inserter(file_chooser())
 		print("Insert sequences for alignment:")
-		first = protein_sequence_input_check(letters)
-		second = protein_sequence_input_check(letters)
+		first = sequence_input_check(letters)
+		second = sequence_input_check(letters)
 		if a in ["G", "g"]:
 			print(global_alignment_protein(first, second, letters))
 		else:

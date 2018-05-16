@@ -64,20 +64,14 @@ def input_check():
 		print("Not a number. Try again.")
 		return input_check()	
 
-def sequence_input_check():
+def sequence_input_check(allowed):
 	sequence = input()
-	for i in range(len(sequence)):
-		if sequence[i] not in {"A","C","G","T","a","c","g","t"}:
-			print("Not a valid sequence.Try again")
-			return sequence_input_check()
-	return sequence	
-
-def protein_sequence_input_check(allowed):
-	sequence = input()
+	sequence = sequence.upper()
+	print(sequence)
+	print(allowed)
 	for i in range(len(sequence)):
 		if sequence[i] not in allowed:
 			print("Invalid sequence.Try again.")
-			return protein_sequence_input_check(allowed)
-	return sequence 
-
+			return sequence_input_check(allowed)
+	return sequence
 		
