@@ -41,23 +41,6 @@ def custom_matrix():
 	print(SCORE_MATRIX)
 	return SCORE_MATRIX
 	
-def fill_matrix(n, m, t, param1, param2, param3):
-	global GIVEN
-	global SCORE_MATRIX
-	SCORE_MATRIX = np.zeros((n,m))
-	GIVEN = True
-	for i in range(n):
-		for j in range(m):
-			if i == j:
-				SCORE_MATRIX[i][j] = param1
-			elif t.lower() == "ttm" and i + j == 3:
-				SCORE_MATRIX[i][j] = param3
-			else: 
-				SCORE_MATRIX[i][j] = param2
-	print("Score matrix (" + t +"):")
-	print(SCORE_MATRIX)
-	return SCORE_MATRIX
-	
 def premade_score():
 	print("Do you want to use BLAST(B), Transition-Transvertion Matrix(TTM) or none?")
 	m = input()
@@ -67,9 +50,9 @@ def premade_score():
 	elif m in {"no", "n"}:
 		return 
 	elif m in {"B","b"}:
-		return fill_matrix(4, 4, m, 5, -4, 0)
+		return given_matrices_inserter("blast.txt")
 	else:
-		return fill_matrix(4, 4, m, 1, -5, -1)
+		return given_matrices_inserter("ttm.txt")
 	
 def matrix_chooser():
 	print("Do you want to use custom score matrix? yes/no")

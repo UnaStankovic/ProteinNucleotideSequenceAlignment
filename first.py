@@ -9,7 +9,7 @@
 #TODO : Add custom matrix input format for nucleotide and protein 
 import numpy as np
 from utilities import input_check, match_mis_gap_chooser
-from matrices import custom_matrix, fill_matrix, premade_score, matrix_chooser
+from matrices import custom_matrix, premade_score, matrix_chooser
 from second import match_score
 #not a fan of global variables but these are necessary
 #SCORE_MATRIX = np.zeros((10,10))
