@@ -1,8 +1,9 @@
 #This file contains option choosers and other screen settings
 from utilities import sequence_chooser, file_chooser, sequence_input_check
-from first import global_alignment_nucleotide, local_alignment_nucleotide
-from second import global_alignment_protein, local_alignment_protein, given_matrices_inserter
+from first import global_alignment, local_alignment
+from second import given_matrices_inserter
 from third import protein_nucleotide_alignment
+import settings as s
 
 def alignment_chooser(opt):
 	print("For global alignment type G, for local L:")
@@ -16,18 +17,18 @@ def alignment_chooser(opt):
 		first = sequence_input_check(letters)
 		second = sequence_input_check(letters)
 		if a in ["G", "g"]:
-			print(global_alignment_nucleotide(first, second, letters))
+			print(global_alignment(first, second, letters))
 		else:
-			print(local_alignment_nucleotide(first, second, letters))
+			print(local_alignment(first, second, letters))
 	elif opt == '2':
 		letters = given_matrices_inserter(file_chooser())
 		print("Insert sequences for alignment:")
 		first = sequence_input_check(letters)
 		second = sequence_input_check(letters)
 		if a in ["G", "g"]:
-			print(global_alignment_protein(first, second, letters))
+			print(global_alignment(first, second, letters))
 		else:
-			print(local_alignment_protein(first, second, letters))  
+			print(local_alignment(first, second, letters))
 
 
 def option_chooser(opt):
@@ -47,7 +48,7 @@ def option_chooser(opt):
 		given_matrices_inserter(file_chooser())
 	else:
 		exit()
-		
+
 def screen():
 	print("Choose one option of the following:\n \
 		1. Global and local alignment of nucleotide sequences using given matrix as a score matrix\n \
