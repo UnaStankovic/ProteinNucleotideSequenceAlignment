@@ -33,6 +33,15 @@ def sequence_chooser():
 		sequence = input()
 		return sequence 
 
+def file_chooser():
+	print("Insert filename ex. blast.txt")
+	name = input()
+	if(name.find('.txt') == -1):
+		print("Not a valid option. Try again.")
+		return file_chooser()
+	else:
+		return name
+
 def sequence_input_check():
 	sequence = input()
 	for i in range(len(sequence)):
@@ -87,7 +96,7 @@ def option_chooser(opt):
 		return third.protein_nucleotide_alignment(first, second)
 	elif opt == '4':
 		print("Option 4")
-		given_matrices_inserter("blast.txt")
+		given_matrices_inserter(file_chooser())
 	else:
 		exit()
 		
