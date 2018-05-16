@@ -64,18 +64,29 @@
 #   -8 -8 -8 -8 -8 -8 -8 -8 -8 -8 -8 -8 -8 -8 -8 -8 -8 -8 -8 -8 -8 -8 -8  1 
 # 	 G  A  V  L  I  P  S  T  D  E  N  Q  K  R  H  F  Y   W  M  C  B  Z   X
 import numpy as np 
+from matrices import given_matrices_inserter
 
-global score_matrix 
-score_matrix = np.zeros((10,10))
-global GIVEN2 
-GIVEN2 = False
+#TODO global conf = {}
+
+#global score_matrix 
+#score_matrix = np.zeros((10,10))
+#global GIVEN
+#global GIVEN2 
+#GIVEN2 = False
 
 def match_score(c1, c2, m, mm, letters):
-	global GIVEN2
-	global score_matrix
+	global GIVEN, GIVEN2, score_matrix, SCORE_MATRIX
 	GIVEN2 = True
 	mapped_values = {}
-	if GIVEN2:
+	if GIVEN:
+		mapped_values = {'A' : 0, 'a' : 0,
+						'T' : 1, 't' : 1,
+						'C' : 2, 'c' : 2,
+						'G' : 3, 'g' : 3}
+		a = mapped_values[c1]
+		b = mapped_values[c2]
+		return SCORE_MATRIX[a][b]
+	elif GIVEN2:
 		for i, v in enumerate(letters):
 			print(i,v)
 			mapped_values[v] = i
@@ -87,30 +98,7 @@ def match_score(c1, c2, m, mm, letters):
 		return m
 	else: 
 		return mm
-			
 
-def given_matrices_inserter(filename):
-	try:	
-		data = open(filename, 'r')
-		dimensions = data.readline()
-		n = int(dimensions)
-		letters = data.readline()
-		global score_matrix
-		score_matrix = np.zeros((n,n))
-		for i in range(0,n):
-			arr = data.readline().split(" ")
-			for j in range(0,n):
-				score_matrix[i][j] = arr[j]
-		print("filename matrix:")
-		print(score_matrix)
-		letters = letters.replace('\n', '')
-		letters_arr = letters.split(' ')
-		print(letters_arr)
-		return letters_arr 
-	except FileNotFoundError:
-		print("There is no matrix file.")
-		exit()
-		
 def global_alignment_protein(first, second, letters):
 	match_score("A", "G", 5, 10, letters)
 	print("globalno 1")
