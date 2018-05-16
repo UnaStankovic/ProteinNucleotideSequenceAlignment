@@ -73,7 +73,7 @@ def alignment_chooser(opt):
 		else:
 			print(local_alignment_nucleotide(first, second))
 	elif opt == '2':
-		letters = given_matrices_inserter("blast.txt")
+		letters = given_matrices_inserter(file_chooser())
 		print("Insert sequences for alignment:")
 		first = protein_sequence_input_check(letters)
 		second = protein_sequence_input_check(letters)
