@@ -5,6 +5,7 @@
 #Finally, protein sequences are aligned. 
 from utilities import file_opener, rna_file_writer
 
+#actually alignment of two proteins of which one or both are to be translated into aminoacids if this option is chosen
 def protein_nucleotide_alignment(first, second):
 	first = protein_or_nucleotide(first)
 	second = protein_or_nucleotide(second)

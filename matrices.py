@@ -21,8 +21,7 @@ def given_matrices_inserter(filename):
 		return letters_arr 
 	except FileNotFoundError:
 		print("There is no matrix file.")
-		exit()
-		
+		exit()		
 
 def custom_matrix():
 	global SCORE_MATRIX

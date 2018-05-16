@@ -3,13 +3,9 @@
 #BLOSUM score alignment between evolutionarily-divergent proteins, refers to percent identity  
 #PAM High number: compares distantly related proteins 
 #BLOSUM High number : compares closely related proteins 
-#TODO :PAM250																						
-#TODO: fix letter reading - spaces, newlines - regex
 
 import numpy as np 
 from matrices import given_matrices_inserter
-
-#TODO global conf = {}
 
 #global score_matrix 
 #score_matrix = np.zeros((10,10))
