@@ -1,4 +1,4 @@
-#This file contains global and local alignments of nucleotide or prsequences using given matrix as a score matrix 
+#This file contains global and local alignments of nucleotide or protein sequences using given matrix as a score matrix 
 #BLAST AND TTM MATRIX ARE GIVEN AS 
 #  A  T  C  G      A  T  C  G
 #A 5 -4 -4 -4    A 1 -5 -5 -1
