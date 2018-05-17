@@ -16,9 +16,8 @@ from second import match_score
 
 
 def global_alignment(first, second, letters):
-	if p == 0:
-		matrix_chooser()
-	match, mismatch, gap = match_mis_gap_chooser()
+	matrix_chooser(letters)
+	match, mismatch, gap = match_mis_gap_chooser("g")
 	n = len(first)
 	m = len(second)
 	backtrack = [[(-1,1) for j in range(m+1)] for i in range(n+1)]
@@ -62,8 +61,8 @@ def global_alignment(first, second, letters):
 	return s[n][m]
 
 def local_alignment(first, second, letters):
-	matrix_chooser()
-	match, mismatch, gap = match_mis_gap_chooser()
+	matrix_chooser(letters)
+	match, mismatch, gap = match_mis_gap_chooser("l")
 	local_alignment = [[0 for j in range(len(second) + 1)] for i in range(len(first) + 1)]
 
 	for i in range(len(first) + 1):

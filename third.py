@@ -8,20 +8,23 @@ from first import global_alignment, local_alignment
 from matrices import given_matrices_inserter
 
 #actually alignment of two proteins of which one or both are to be translated into aminoacids if this option is chosen
-def protein_nucleotide_alignment(first, second, letters):
-	first = protein_or_nucleotide(first)
-	second = protein_or_nucleotide(second)
-	if first == -1 and second == -1:
+def protein_nucleotide_alignment(first, second):
+	f = protein_or_nucleotide(first)
+	s = protein_or_nucleotide(second)
+	letters = given_matrices_inserter(file_chooser())
+	if f == -1 and s == -1:
 		print("Both proteins.")
-		letters = given_matrices_inserter(file_chooser())
-		if alignment_chooser(3) == 'g':
-			global_alignment(first, second, letters)
-		else:
-			local_alignment(first, second, letters)
+		return first, second, letters
+	elif f == -1 and s != -1:
+		return first, s, letters 
+	elif s == -1 and f != -1:
+		return f, second, letters
 	else:
 		print(first)
 		print(second)
-
+		print("You should have chosen option 1 at the beginning. Try again.")
+		return screens()
+	
 def protein_or_nucleotide(sequence):
 	p = 0
 	if sequence.find('.txt') != -1:

@@ -30,25 +30,21 @@ def alignment_chooser(opt):
 		else:
 			print(local_alignment(first, second, letters))
 	elif opt == '3':
+		first = sequence_chooser()
+		second = sequence_chooser()
+		first, second, letters = protein_nucleotide_alignment(first, second)
 		if a in ["G", "g"]:
-			G = True
-			return "g"
+			return global_alignment(first, second, letters)
 		else:
-			L = True
-			return "l"
+			return local_alignment(first, second, letters)
 
 def option_chooser(opt):
 	valid = set(['1','2','3','4','5'])
 	if opt not in valid:
 		print("Not a valid option. Try again.")
 		return screen()
-	elif opt in ["1","2"]:
+	elif opt in ["1","2", "3"]:
 		return alignment_chooser(opt)
-	elif opt == '3':
-		print("Option 3")
-		first = sequence_chooser()
-		second = sequence_chooser()
-		return protein_nucleotide_alignment(first, second)
 	elif opt == '4':
 		print("Option 4")
 		given_matrices_inserter(file_chooser())

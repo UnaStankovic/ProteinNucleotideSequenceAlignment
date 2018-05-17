@@ -23,18 +23,17 @@ def given_matrices_inserter(filename):
 		print("There is no matrix file.")
 		exit()		
 
-def custom_matrix():
+def custom_matrix(letters):
 	global SCORE_MATRIX
 	global CUSTOM
 	CUSTOM = True
-	print("Insert dimensions:")
-	n = input_check()
-	m = input_check()
+	print("Insert matrix data in following order: " + str(letters))
+	n = len(letters)
 	print("Insert matrix:")
-	SCORE_MATRIX = np.zeros((n,m))
+	SCORE_MATRIX = np.zeros((n,n))
 	for i in range(0,n):
 		print(SCORE_MATRIX)
-		for j in range(0,m):
+		for j in range(0,n):
 			SCORE_MATRIX[i][j] = input_check()
 	print("Custom matrix:")
 	print(SCORE_MATRIX)
@@ -53,13 +52,13 @@ def premade_score():
 	else:
 		return given_matrices_inserter("ttm.txt")
 	
-def matrix_chooser():
+def matrix_chooser(letters):
 	print("Do you want to use custom score matrix? yes/no")
 	a = input()
 	if a not in ['yes','no']:
 		print("Not a valid option. Try again.")
-		return matrix_chooser()
+		return matrix_chooser(letters)
 	elif a == 'yes':
-		return custom_matrix()
+		return custom_matrix(letters)
 	else:
 		return premade_score()	
