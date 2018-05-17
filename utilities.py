@@ -1,5 +1,8 @@
-#This file contains basic functions, such as: file choosers, openers, info inputs and similar. 
-#CHOOSERS 
+#This file contains basic functions, such as: file choosers, openers, info inputs and similar.
+import numpy as np
+import settings as s
+
+#CHOOSERS
 def sequence_chooser():
 	print("Enter 1 for a file name or 2 for DNA/protein sequence:")
 	a = input()
@@ -17,7 +20,7 @@ def sequence_chooser():
 	else:
 		print("Insert sequence:")
 		sequence = input()
-		return sequence 
+		return sequence
 
 def file_chooser():
 	print("Insert filename ex. blast.txt")
@@ -29,8 +32,6 @@ def file_chooser():
 		return name
 
 def match_mis_gap_chooser():
-	global G
-	global L 
 	print("Do you want to manually choose values for match, mismatch and gap? \
 		(If you've chosen to use BLAST or TTM matrix only gap value will be applied.)")
 	m = input()
@@ -44,7 +45,7 @@ def match_mis_gap_chooser():
 		mismatch = input_check()
 		print("Gap:")
 		gap = input_check()
-	elif G == True:
+	elif s.G == True:
 		match = 5
 		mismatch = -1
 		gap = -2
@@ -53,8 +54,8 @@ def match_mis_gap_chooser():
 		mismatch = -1
 		gap = -1
 	return match, mismatch, gap
-#INPUT CHECKS
 
+#INPUT CHECKS
 def input_check():
 	val = input()
 	v = val
@@ -62,7 +63,7 @@ def input_check():
 		return int(val)
 	else:
 		print("Not a number. Try again.")
-		return input_check()	
+		return input_check()
 
 def sequence_input_check(allowed):
 	sequence = input()
@@ -74,10 +75,10 @@ def sequence_input_check(allowed):
 			print("Invalid sequence.Try again.")
 			return sequence_input_check(allowed)
 	return sequence
-		
+
 #FILE OPENERS - WRITERS
 def file_opener(filename):
-	try:	
+	try:
 		dna = open(filename, 'r')
 		content = dna.read()
 		content = content.replace('\n','')
@@ -103,3 +104,14 @@ def rna_file_writer(content):
 		return
 	else:
 		return
+
+def input_matrix():
+	print("Insert the size of the matrix and the sequence " \
+	 "of letters in which order you choose to fill the matrix:\ne.g. 4 A T C G")
+	input_arr = raw_input().split()
+	n = int(input_arr[0])
+	letters = input_arr[1:]
+	s.score_matrix = np.zeros((n, n)) # which matrix should be filled here?
+	for i in range(n):
+		s.score_matrix[i] = raw_input().split()
+	return letters
