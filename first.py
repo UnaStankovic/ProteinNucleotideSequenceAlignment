@@ -6,7 +6,6 @@
 #BLOSUM High number : compares closely related proteins
 
 import numpy as np
-import settings
 from utilities import input_check, match_mis_gap_chooser
 from matrices import custom_matrix, premade_score, matrix_chooser
 

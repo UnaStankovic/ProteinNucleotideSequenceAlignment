@@ -1,6 +1,5 @@
 #This file contains basic functions, such as: file choosers, openers, info inputs and similar.
 import numpy as np
-import settings as s
 
 #CHOOSERS
 def sequence_chooser():

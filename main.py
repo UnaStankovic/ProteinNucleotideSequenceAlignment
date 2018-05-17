@@ -26,7 +26,7 @@
 # 9. to make revision of all the imports and remove unneccessary ones
 
 
-import first, second, third, fourth, utilities, settings
+import first, second, third, fourth, utilities
 from screens import screen
 
 def main():
