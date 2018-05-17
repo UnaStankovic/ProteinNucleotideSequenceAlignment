@@ -8,7 +8,7 @@ import numpy as np
 import settings as s
 from matrices import given_matrices_inserter
 
-def match_score(c1, c2, m, mm, letters):
+def match_score(c1, c2, m, mm, letters, score_matrix):
 	s.GIVEN = True
 	mapped_values = {}
 	if s.GIVEN:
@@ -18,7 +18,7 @@ def match_score(c1, c2, m, mm, letters):
 		print(mapped_values)
 		a = mapped_values[c1]
 		b = mapped_values[c2]
-		return s.score_matrix[a][b]
+		return score_matrix[a][b]
 	elif c1 == c2:
 		return m
 	else:

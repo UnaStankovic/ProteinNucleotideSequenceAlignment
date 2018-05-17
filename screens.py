@@ -21,7 +21,7 @@ def alignment_chooser(opt):
 		else:
 			print(local_alignment(first, second, letters))
 	elif opt == '2':
-		letters = given_matrices_inserter(file_chooser())
+		letters,_ = given_matrices_inserter(file_chooser())
 		print("Insert sequences for alignment:")
 		first = sequence_input_check(letters)
 		second = sequence_input_check(letters)

@@ -104,14 +104,3 @@ def rna_file_writer(content):
 		return
 	else:
 		return
-
-def input_matrix():
-	print("Insert the size of the matrix and the sequence " \
-	 "of letters in which order you choose to fill the matrix:\ne.g. 4 A T C G")
-	input_arr = input().split()
-	n = int(input_arr[0])
-	letters = input_arr[1:]
-	s.score_matrix = np.zeros((n, n)) # which matrix should be filled here?
-	for i in range(n):
-		s.score_matrix[i] = input().split()
-	return letters

@@ -14,8 +14,8 @@
 # 6. fourth - contains multiple sequences alignment, to be moved to third and removed
 
 #TODO:
-# 0. PRIORITY : to fix global variables issues by doing 1 and 2 :D
-# 1. to reduce global variables to just one score matrix and one given
+# DONE - removed global vars 0. PRIORITY : to fix global variables issues by doing 1 and 2 :D
+# DONE - removed global vars 1. to reduce global variables to just one score matrix and one given
 # DONE - added to settings file 2. to move global variables to one global conf = {}
 # 3. Add custom matrix input format for nucleotide and protein - this might be useless since the num of letters and matrix for proteins is too big
 # 4. fix letter reading - spaces, newlines - regex from file

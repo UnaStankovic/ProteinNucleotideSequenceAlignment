@@ -7,7 +7,6 @@ def given_matrices_inserter(filename):
 		dimensions = data.readline()
 		n = int(dimensions)
 		letters = data.readline()
-		global score_matrix
 		score_matrix = np.zeros((n,n))
 		for i in range(0,n):
 			arr = data.readline().split(" ")
@@ -18,39 +17,67 @@ def given_matrices_inserter(filename):
 		letters = letters.replace('\n', '')
 		letters_arr = letters.split(' ')
 		print(letters_arr)
-		return letters_arr 
+		return letters_arr, score_matrix
 	except FileNotFoundError:
 		print("There is no matrix file.")
 		exit()		
 
+def input_matrix():
+	print("Insert the size of the matrix and the sequence " \
+	 "of letters in which order you choose to fill the matrix:\ne.g. 4 A T C G")
+	input_arr = input().split()
+	n = int(input_arr[0])
+	letters = input_arr[1:]
+	score_matrix = np.zeros((n, n)) # which matrix should be filled here?
+	for i in range(n):
+		score_matrix[i] = input().split()
+	return letters, score_matrix
+
 def custom_matrix(letters):
-	global SCORE_MATRIX
-	global CUSTOM
-	CUSTOM = True
-	print("Insert matrix data in following order: " + str(letters))
-	n = len(letters)
-	print("Insert matrix:")
-	SCORE_MATRIX = np.zeros((n,n))
-	for i in range(0,n):
-		print(SCORE_MATRIX)
-		for j in range(0,n):
-			SCORE_MATRIX[i][j] = input_check()
-	print("Custom matrix:")
-	print(SCORE_MATRIX)
-	return SCORE_MATRIX
+	for i in range(len(letters)):
+		if letters[i] not in ["A", "C", "G", "T"]:
+			return input_matrix()
+		else:
+			print("Insert matrix data in following order: " + str(letters))
+			n = len(letters)
+			print("Insert matrix:")
+			score_matrix = np.zeros((n,n))
+			for i in range(0,n):
+				print(score_matrix)
+				for j in range(0,n):
+					score_matrix[i][j] = input_check()
+			print("Custom matrix:")
+			print(score_matrix)
+			return letters,score_matrix
 	
-def premade_score():
-	print("Do you want to use BLAST(B), Transition-Transvertion Matrix(TTM) or none?")
-	m = input()
-	if m not in {"B","b", "TTM","ttm", "no", "n"}:
-		print("Not a valid option. Try again.")
-		return premade_score()
-	elif m in {"no", "n"}:
-		return 
-	elif m in {"B","b"}:
-		return given_matrices_inserter("blast.txt")
-	else:
-		return given_matrices_inserter("ttm.txt")
+def premade_score(letters):
+	blosum = {"blosum", "BLOSUM", "blosum45", "BLOSUM45"}
+	pam = {"pam","PAM", "pam250", "PAM250"}
+	for i in range(len(letters)):
+		if letters[i] not in ["A", "C", "G", "T"]:
+			print("Do you want to use PAM250, BLOSUM45 or none?")
+			m = input()
+			if m not in {pam, blosum,  "no", "n"}:
+				print("Not a valid option. Try again.")
+				return premade_score()
+			elif m in {"no", "n"}:
+				return 
+			elif m in blosum:
+				return given_matrices_inserter("blosum45.txt")
+			else:
+				return given_matrices_inserter("pam250.txt")
+		else:
+			print("Do you want to use BLAST(B), Transition-Transvertion Matrix(TTM) or none?")
+			m = input()
+			if m not in {"B","b", "TTM","ttm", "no", "n"}:
+				print("Not a valid option. Try again.")
+				return premade_score(letters)
+			elif m in {"no", "n"}:
+				return 
+			elif m in {"B","b"}:
+				return given_matrices_inserter("blast.txt")
+			else:
+				return given_matrices_inserter("ttm.txt")
 	
 def matrix_chooser(letters):
 	print("Do you want to use custom score matrix? yes/no")
@@ -61,4 +88,4 @@ def matrix_chooser(letters):
 	elif a == 'yes':
 		return custom_matrix(letters)
 	else:
-		return premade_score()	
+		return premade_score(letters)	
