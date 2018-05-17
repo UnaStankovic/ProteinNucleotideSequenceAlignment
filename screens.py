@@ -29,7 +29,13 @@ def alignment_chooser(opt):
 			print(global_alignment(first, second, letters))
 		else:
 			print(local_alignment(first, second, letters))
-
+	elif opt == '3':
+		if a in ["G", "g"]:
+			G = True
+			return "g"
+		else:
+			L = True
+			return "l"
 
 def option_chooser(opt):
 	valid = set(['1','2','3','4','5'])

@@ -13,10 +13,13 @@ from utilities import input_check, match_mis_gap_chooser
 from matrices import custom_matrix, premade_score, matrix_chooser
 from second import match_score
 
+
+
 def global_alignment(first, second, letters):
 	# global G
-	settings.G = True
-	matrix_chooser()
+	#settings.G = True
+	if p == 0:
+		matrix_chooser()
 	match, mismatch, gap = match_mis_gap_chooser()
 	n = len(first)
 	m = len(second)
@@ -62,7 +65,7 @@ def global_alignment(first, second, letters):
 
 def local_alignment(first, second, letters):
 	# global L
-	settings.L = True
+	#settings.L = True
 	matrix_chooser()
 	match, mismatch, gap = match_mis_gap_chooser()
 	local_alignment = [[0 for j in range(len(second) + 1)] for i in range(len(first) + 1)]

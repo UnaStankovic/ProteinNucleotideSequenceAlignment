@@ -4,14 +4,20 @@
 #Thirdly, codons are translated into aminoacids. 
 #Finally, protein sequences are aligned. 
 from utilities import file_opener, rna_file_writer
+from first import global_alignment, local_alignment
+from matrices import given_matrices_inserter
 
 #actually alignment of two proteins of which one or both are to be translated into aminoacids if this option is chosen
-def protein_nucleotide_alignment(first, second):
+def protein_nucleotide_alignment(first, second, letters):
 	first = protein_or_nucleotide(first)
 	second = protein_or_nucleotide(second)
 	if first == -1 and second == -1:
 		print("Both proteins.")
-		
+		letters = given_matrices_inserter(file_chooser())
+		if alignment_chooser(3) == 'g':
+			global_alignment(first, second, letters)
+		else:
+			local_alignment(first, second, letters)
 	else:
 		print(first)
 		print(second)

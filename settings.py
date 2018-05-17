@@ -6,5 +6,4 @@ def init():
     GIVEN = False
     GIVEN2 = False
     CUSTOM = False
-    G = False
-    L = False
+
