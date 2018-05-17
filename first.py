@@ -16,9 +16,10 @@ from second import match_score
 
 
 def global_alignment(first, second, letters):
+	given = 0
 	matrix = np.zeros((len(letters), len(letters)))
-	letters, matrix = matrix_chooser(letters)
 	match, mismatch, gap = match_mis_gap_chooser("g")
+	given, letters, matrix = matrix_chooser(letters, match, mismatch)
 	n = len(first)
 	m = len(second)
 	backtrack = [[(-1,1) for j in range(m+1)] for i in range(n+1)]
@@ -33,7 +34,7 @@ def global_alignment(first, second, letters):
 
 	for i in range(1, n+1):
 		for j in range(1, m+1):
-			s[i][j] = max(s[i-1][j] + gap, s[i][j-1] + gap, s[i-1][j-1] + match_score(first[i-1], second[j-1], match, mismatch, letters, matrix))
+			s[i][j] = max(s[i-1][j] + gap, s[i][j-1] + gap, s[i-1][j-1] + match_score(first[i-1], second[j-1], match, mismatch, letters, matrix, given))
 			if s[i][j] == s[i-1][j] + gap:
 				backtrack[i][j] = (i-1, j)
 			elif s[i][j] == s[i][j-1] + gap:
@@ -62,8 +63,10 @@ def global_alignment(first, second, letters):
 	return s[n][m]
 
 def local_alignment(first, second, letters):
-	letters, matrix = matrix_chooser(letters)
+	given = 0
 	match, mismatch, gap = match_mis_gap_chooser("l")
+	print(matrix_chooser(letters, match, mismatch))
+	given, letters, matrix = matrix_chooser(letters, match, mismatch)
 	local_alignment = [[0 for j in range(len(second) + 1)] for i in range(len(first) + 1)]
 
 	for i in range(len(first) + 1):
@@ -73,7 +76,7 @@ def local_alignment(first, second, letters):
 
 	for i in range(1, len(first) +1):
 		for j in range(1, len(second) + 1):
-			matcher = match_score(first[i-1], second[j-1], match, mismatch, letters, matrix)
+			matcher = match_score(first[i-1], second[j-1], match, mismatch, letters, matrix, given)
 			if matcher < 0:
 				matcher = 0
 			local_alignment[i][j] = max(0, local_alignment[i-1][j] + gap, local_alignment[i][j-1] + gap, \
