@@ -26,6 +26,8 @@
 # 9. to make revision of all the imports and remove unneccessary ones
 # 10. Fix thrid file function calls (now second file)
 # 11. DO CLUSTALW
+# 12. FIX PAM250.txt and BLOSUM45.txt so they can be used
+# 13. add more examples for testing 
 
 import first, second, third, utilities
 from screens import screen
