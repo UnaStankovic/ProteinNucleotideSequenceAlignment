@@ -3,7 +3,7 @@ import numpy as np
 from utilities import sequence_chooser, file_chooser, sequence_input_check
 from first import global_alignment, local_alignment
 from matrices import given_matrices_inserter
-from third import protein_nucleotide_alignment
+from second import protein_nucleotide_alignment
 
 def alignment_chooser(opt):
 	print("For global alignment type G, for local L:")

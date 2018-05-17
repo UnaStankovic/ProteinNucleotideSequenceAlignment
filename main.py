@@ -27,12 +27,10 @@
 # 10. Fix thrid file function calls (now second file)
 # 11. DO CLUSTALW
 
-
-import first, second, third, fourth, utilities
+import first, second, third, utilities
 from screens import screen
 
 def main():
-        settings.init()
         screen()
 
 if __name__ == "__main__":
