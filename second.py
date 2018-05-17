@@ -9,17 +9,9 @@ import settings as s
 from matrices import given_matrices_inserter
 
 def match_score(c1, c2, m, mm, letters):
-	s.GIVEN2 = True
+	s.GIVEN = True
 	mapped_values = {}
 	if s.GIVEN:
-		mapped_values = {'A' : 0, 'a' : 0,
-						'T' : 1, 't' : 1,
-						'C' : 2, 'c' : 2,
-						'G' : 3, 'g' : 3}
-		a = mapped_values[c1]
-		b = mapped_values[c2]
-		return s.SCORE_MATRIX[a][b]
-	elif s.GIVEN2:
 		for i, v in enumerate(letters):
 			print(i,v)
 			mapped_values[v] = i
