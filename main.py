@@ -28,6 +28,7 @@
 # 11. DO CLUSTALW
 # 12. FIX PAM250.txt and BLOSUM45.txt so they can be used
 # 13. add more examples for testing 
+# 14. add in local alignment visual representation
 
 import first, second, third, utilities
 from screens import screen

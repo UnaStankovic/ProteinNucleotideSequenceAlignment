@@ -15,16 +15,16 @@ def protein_nucleotide_alignment(first, second):
 	letters, score_matrix = given_matrices_inserter(file_chooser())
 	if f == -1 and s == -1:
 		print("Both proteins.")
-		return first, second, letters
+		return first, second, letters, score_matrix
 	elif f == -1 and s != -1:
-		return first, s, letters 
+		return first, s, letters, score_matrix
 	elif s == -1 and f != -1:
-		return f, second, letters
+		return f, second, letters, score_matrix
 	else:
 		print(first)
 		print(second)
-		print("You should have chosen option 1 at the beginning. Try again.")
-		return screens()
+		print("Both nucleotides. You should have chosen option 1 at the beginning. Try again.")
+		return exit()
 	
 def protein_or_nucleotide(sequence):
 	p = 0

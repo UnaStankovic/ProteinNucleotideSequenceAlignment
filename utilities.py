@@ -15,11 +15,11 @@ def sequence_chooser():
 			print("Not a valid option. Try again.")
 			return sequence_chooser()
 		else:
-			return data
+			return data.upper()
 	else:
 		print("Insert sequence:")
 		sequence = input()
-		return sequence
+		return sequence.upper()
 
 def file_chooser():
 	print("Insert filename ex. blast.txt")

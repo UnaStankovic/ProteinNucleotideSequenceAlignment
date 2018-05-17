@@ -33,7 +33,7 @@ def alignment_chooser(opt):
 	elif opt == '3':
 		first = sequence_chooser()
 		second = sequence_chooser()
-		matrix = np.zeros((len(letters), len(letters)))
+		matrix = np.zeros((2,2))
 		first, second, letters, matrix = protein_nucleotide_alignment(first, second)
 		if a in ["G", "g"]:
 			return global_alignment(first, second, letters, matrix)
