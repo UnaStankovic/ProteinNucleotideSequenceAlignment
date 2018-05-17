@@ -29,6 +29,7 @@
 import first, second, third, fourth, utilities
 from screens import screen
 import numpy as np
+
 SCORE_MATRIX = np.zeros((10,10))
 score_matrix = np.zeros((10,10))
 GIVEN = False
