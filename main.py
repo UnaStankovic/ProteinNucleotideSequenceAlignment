@@ -24,12 +24,13 @@
 # DONE - match_score function rewritten 7. in match_score function to reduce 2 GIVEN options to one by sending letters for nucleotides
 # DONE - 8. to leave just one global alignment function and local_alignment function which is to be invoked by both proteins and nucleotides
 # DONE - 9. to make revision of all the imports and remove unneccessary ones
-# 10. Fix thrid file function calls (now second file), there should be some type of check if given sequence is correct. If not, the program crashes when
+# DONE - 10. Fix thrid file function calls (now second file), there should be some type of check if given sequence is correct. If not, the program crashes when
 # 	there is no sequence letter in table for match_score
 # 11. DO CLUSTALW
-# 12. FIX PAM250.txt and BLOSUM45.txt so they can be used
+# 12. FIX PAM250.txt and BLOSUM45.txt so they can be used - REMOVE EXTRA SPACES 
 # 13. add more examples for testing 
-# 14. add in local alignment visual representation
+# 14. add in local alignment visual representation of alignment - backtrack
+# 15. Add/ remove printfs 
 
 import first, second, third, utilities
 from screens import screen

@@ -1,6 +1,6 @@
 #This file contains option choosers and other screen settings
 import numpy as np 
-from utilities import sequence_chooser, file_chooser, sequence_input_check
+from utilities import file_chooser, sequence_input_check
 from first import global_alignment, local_alignment
 from matrices import given_matrices_inserter
 from second import protein_nucleotide_alignment
@@ -31,10 +31,11 @@ def alignment_chooser(opt):
 		else:
 			print(local_alignment(first, second, letters, matrix))
 	elif opt == '3':
-		first = sequence_chooser()
-		second = sequence_chooser()
-		matrix = np.zeros((2,2))
-		first, second, letters, matrix = protein_nucleotide_alignment(first, second)
+		letters, matrix = given_matrices_inserter(file_chooser())
+		print("Insert sequences for alignment:")
+		first = sequence_input_check(letters)
+		second = sequence_input_check(letters)
+		first, second = protein_nucleotide_alignment(first, second)
 		if a in ["G", "g"]:
 			return global_alignment(first, second, letters, matrix)
 		else:

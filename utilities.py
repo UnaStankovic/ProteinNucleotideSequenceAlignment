@@ -2,25 +2,6 @@
 import numpy as np
 
 #CHOOSERS
-def sequence_chooser():
-	print("Enter 1 for a file name or 2 for DNA/protein sequence:")
-	a = input()
-	if a not in {"1","2"}:
-		print("Not a valid option.Try again.")
-		return sequence_chooser()
-	elif a == "1":
-		print("Enter file name:")
-		data = input()
-		if(data.find('.txt') == -1):
-			print("Not a valid option. Try again.")
-			return sequence_chooser()
-		else:
-			return data.upper()
-	else:
-		print("Insert sequence:")
-		sequence = input()
-		return sequence.upper()
-
 def file_chooser():
 	print("Insert filename ex. blast.txt")
 	name = input()
@@ -65,15 +46,31 @@ def input_check():
 		return input_check()
 
 def sequence_input_check(allowed):
-	sequence = input()
-	sequence = sequence.upper()
-	print(sequence)
-	print(allowed)
-	for i in range(len(sequence)):
-		if sequence[i] not in allowed:
-			print("Invalid sequence.Try again.")
-			return sequence_input_check(allowed)
-	return sequence
+	print("Enter 1 for a file name or 2 for DNA/protein sequence:")
+	a = input()
+	if a not in {"1","2"}:
+		print("Not a valid option.Try again.")
+		return sequence_input_check(allowed)
+	elif a == "1":
+		print("Enter file name:")
+		data = input()
+		if(data.find('.txt') == -1):
+			print("Not a valid option. Try again.")
+			return sequence_chooser(allowed)
+		else:
+			data = data.read()
+			return data.upper()
+	else:
+		print("Insert sequence:")
+		sequence = input()
+		sequence = sequence.upper()
+		print(sequence)
+		print(allowed)
+		for i in range(len(sequence)):
+			if sequence[i] not in allowed:
+				print("Invalid sequence.Try again.")
+				return sequence_input_check(allowed)
+		return sequence
 
 #FILE OPENERS - WRITERS
 def file_opener(filename):

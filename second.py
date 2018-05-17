@@ -12,19 +12,18 @@ from matrices import given_matrices_inserter
 def protein_nucleotide_alignment(first, second):
 	f = protein_or_nucleotide(first)
 	s = protein_or_nucleotide(second)
-	letters, score_matrix = given_matrices_inserter(file_chooser())
 	if f == -1 and s == -1:
 		print("Both proteins.")
-		return first, second, letters, score_matrix
+		return first, second
 	elif f == -1 and s != -1:
-		return first, s, letters, score_matrix
+		return first, s
 	elif s == -1 and f != -1:
-		return f, second, letters, score_matrix
+		return f, second
 	else:
 		print(first)
 		print(second)
-		print("Both nucleotides. You should have chosen option 1 at the beginning. Try again.")
-		return f, s, letters, score_matrix
+		print("Both nucleotides. You should have chosen option 1 at the beginning.")
+		return f, s
 	
 def protein_or_nucleotide(sequence):
 	p = 0
