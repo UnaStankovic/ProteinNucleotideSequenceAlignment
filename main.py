@@ -17,10 +17,10 @@
 # 0. PRIORITY : to fix global variables issues by doing 1 and 2 :D
 # 1. to reduce global variables to just one score matrix and one given
 # DONE - added to settings file 2. to move global variables to one global conf = {}
-# DONE - 3. Add custom matrix input format for nucleotide and protein - this might be useless since the num of letters and matrix for proteins is too big
+# 3. Add custom matrix input format for nucleotide and protein - this might be useless since the num of letters and matrix for proteins is too big
 # 4. fix letter reading - spaces, newlines - regex from file
 # 5. possibly reduce more functions
-# DONE - renamed functions 6. option and alignment chooser to be reduced or rewritten a lot of repetetive code in there right now
+# renamed functions 6. option and alignment chooser to be reduced or rewritten a lot of repetetive code in there right now
 # 7. in match_score function to reduce 2 GIVEN options to one by sending letters for nucleotides
 # DONE - 8. to leave just one global alignment function and local_alignment function which is to be invoked by both proteins and nucleotides
 # 9. to make revision of all the imports and remove unneccessary ones
