@@ -1,9 +1,9 @@
 #This file contains option choosers and other screen settings
+import numpy as np 
 from utilities import sequence_chooser, file_chooser, sequence_input_check
 from first import global_alignment, local_alignment
-from second import given_matrices_inserter
+from matrices import given_matrices_inserter
 from third import protein_nucleotide_alignment
-import settings as s
 
 def alignment_chooser(opt):
 	print("For global alignment type G, for local L:")
@@ -16,27 +16,29 @@ def alignment_chooser(opt):
 		letters = ['A','C','T','G']
 		first = sequence_input_check(letters)
 		second = sequence_input_check(letters)
+		matrix = np.zeros((len(letters), len(letters)))
 		if a in ["G", "g"]:
-			print(global_alignment(first, second, letters))
+			print(global_alignment(first, second, letters, matrix))
 		else:
-			print(local_alignment(first, second, letters))
+			print(local_alignment(first, second, letters, matrix))
 	elif opt == '2':
-		letters,_ = given_matrices_inserter(file_chooser())
+		letters, matrix = given_matrices_inserter(file_chooser())
 		print("Insert sequences for alignment:")
 		first = sequence_input_check(letters)
 		second = sequence_input_check(letters)
 		if a in ["G", "g"]:
-			print(global_alignment(first, second, letters))
+			print(global_alignment(first, second, letters, matrix))
 		else:
-			print(local_alignment(first, second, letters))
+			print(local_alignment(first, second, letters, matrix))
 	elif opt == '3':
 		first = sequence_chooser()
 		second = sequence_chooser()
-		first, second, letters = protein_nucleotide_alignment(first, second)
+		matrix = np.zeros((len(letters), len(letters)))
+		first, second, letters, matrix = protein_nucleotide_alignment(first, second)
 		if a in ["G", "g"]:
-			return global_alignment(first, second, letters)
+			return global_alignment(first, second, letters, matrix)
 		else:
-			return local_alignment(first, second, letters)
+			return local_alignment(first, second, letters, matrix)
 
 def option_chooser(opt):
 	valid = set(['1','2','3','4','5'])

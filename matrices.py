@@ -12,13 +12,13 @@ def given_matrices_inserter(filename):
 			arr = data.readline().split(" ")
 			for j in range(0,n):
 				score_matrix[i][j] = arr[j]
-		print("filename matrix:")
+		filen = filename.strip(".txt")
+		print(filen + " matrix:")
 		print(score_matrix)
 		letters = letters.replace('\n', '')
 		letters_arr = letters.split(' ')
 		print(letters_arr)
-		given = 1
-		return given, letters_arr, score_matrix
+		return letters_arr, score_matrix
 	except FileNotFoundError:
 		print("There is no matrix file.")
 		exit()		
@@ -32,8 +32,7 @@ def fill_matrix(letters, match, mismatch):
 				score_matrix[i][j] = match 
 			else:
 				score_matrix[i][j] = mismatch
-	given = 0
-	return given, letters, score_matrix
+	return letters, score_matrix
 	
 def input_matrix():
 	print("Insert the size of the matrix and the sequence " \
@@ -44,8 +43,7 @@ def input_matrix():
 	score_matrix = np.zeros((n, n)) # which matrix should be filled here?
 	for i in range(n):
 		score_matrix[i] = input().split()
-	given = 1
-	return given, letters, score_matrix
+	return letters, score_matrix
 
 def custom_matrix(letters):
 	for i in range(len(letters)):
@@ -62,17 +60,15 @@ def custom_matrix(letters):
 					score_matrix[i][j] = input_check()
 			print("Custom matrix:")
 			print(score_matrix)
-			given = 1
-			return given, letters,score_matrix
+			return letters,score_matrix
 	
 def premade_score(letters, match, mismatch):
 	blosum = {"blosum", "BLOSUM", "blosum45", "BLOSUM45"}
-	pam = {"pam","PAM", "pam250", "PAM250"}
 	for i in range(len(letters)):
 		if letters[i] not in ["A", "C", "G", "T"]:
 			print("Do you want to use PAM250, BLOSUM45 or none?")
 			m = input()
-			if m not in {pam, blosum,  "no", "n"}:
+			if m not in {"pam","PAM", "pam250", "PAM250", "blosum", "BLOSUM", "blosum45", "BLOSUM45", "no", "n"}:
 				print("Not a valid option. Try again.")
 				return premade_score(letters, match, mismatch)
 			elif m in {"no", "n"}:
