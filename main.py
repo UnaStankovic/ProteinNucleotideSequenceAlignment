@@ -24,6 +24,8 @@
 # DONE - match_score function rewritten 7. in match_score function to reduce 2 GIVEN options to one by sending letters for nucleotides
 # DONE - 8. to leave just one global alignment function and local_alignment function which is to be invoked by both proteins and nucleotides
 # 9. to make revision of all the imports and remove unneccessary ones
+# 10. Fix thrid file function calls (now second file)
+# 11. DO CLUSTALW
 
 
 import first, second, third, fourth, utilities
