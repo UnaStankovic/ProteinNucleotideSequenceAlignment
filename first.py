@@ -12,37 +12,12 @@ import settings
 from utilities import input_check, match_mis_gap_chooser
 from matrices import custom_matrix, premade_score, matrix_chooser
 from second import match_score
-#not a fan of global variables but these are necessary
-#SCORE_MATRIX = np.zeros((10,10))
-#GIVEN = False
-#CUSTOM = False
-
-#G = False
-#L = False
-
-#def match_score(c1, c2, m, mm):
-#	global GIVEN
-#	global SCORE_MATRIX
-#	if GIVEN:
-#		mapped_values = {'A' : 0, 'a' : 0,
-#						'T' : 1, 't' : 1,
-#						'C' : 2, 'c' : 2,
-#						'G' : 3, 'g' : 3}
-#		a = mapped_values[c1]
-#		b = mapped_values[c2]
-#		return SCORE_MATRIX[a][b]
-#	elif c1 == c2:
-#		return m
-#	else:
-#		return mm
 
 def global_alignment(first, second, letters):
 	# global G
 	settings.G = True
 	matrix_chooser()
 	match, mismatch, gap = match_mis_gap_chooser()
-	#TEMPORARY
-	letters = ['A','C','G','T']
 	n = len(first)
 	m = len(second)
 	backtrack = [[(-1,1) for j in range(m+1)] for i in range(n+1)]

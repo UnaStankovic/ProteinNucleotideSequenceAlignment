@@ -11,6 +11,7 @@ def protein_nucleotide_alignment(first, second):
 	second = protein_or_nucleotide(second)
 	if first == -1 and second == -1:
 		print("Both proteins.")
+		
 	else:
 		print(first)
 		print(second)
@@ -21,7 +22,7 @@ def protein_or_nucleotide(sequence):
 		data = file_opener(sequence)
 		return protein_or_nucleotide(data)
 	for i in range(len(sequence)):
-		if sequence[i] in {"A","C","G","T","a","c","g","t"}:
+		if sequence[i] in {"A","C","G","T"}:
 			p += 1
 	if p == len(sequence):
 		print("Sequence1 : " + sequence)

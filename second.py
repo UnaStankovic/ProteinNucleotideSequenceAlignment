@@ -8,12 +8,6 @@ import numpy as np
 import settings as s
 from matrices import given_matrices_inserter
 
-#global score_matrix
-#score_matrix = np.zeros((10,10))
-#global GIVEN
-#global GIVEN2
-#GIVEN2 = False
-
 def match_score(c1, c2, m, mm, letters):
 	s.GIVEN2 = True
 	mapped_values = {}
@@ -37,10 +31,3 @@ def match_score(c1, c2, m, mm, letters):
 		return m
 	else:
 		return mm
-
-# def global_alignment_protein(first, second, letters):
-# 	match_score("A", "G", 5, 10, letters)
-# 	print("globalno 1")
-#
-# def local_alignment_protein(first, second, letters):
-# 	print("lokalno 1")
