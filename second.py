@@ -24,7 +24,7 @@ def protein_nucleotide_alignment(first, second):
 		print(first)
 		print(second)
 		print("Both nucleotides. You should have chosen option 1 at the beginning. Try again.")
-		return exit()
+		return f, s, letters, score_matrix
 	
 def protein_or_nucleotide(sequence):
 	p = 0

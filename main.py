@@ -23,8 +23,9 @@
 # DONE - made minimal, renamed functions 6. option and alignment chooser to be reduced or rewritten a lot of repetetive code in there right now
 # DONE - match_score function rewritten 7. in match_score function to reduce 2 GIVEN options to one by sending letters for nucleotides
 # DONE - 8. to leave just one global alignment function and local_alignment function which is to be invoked by both proteins and nucleotides
-# 9. to make revision of all the imports and remove unneccessary ones
-# 10. Fix thrid file function calls (now second file)
+# DONE - 9. to make revision of all the imports and remove unneccessary ones
+# 10. Fix thrid file function calls (now second file), there should be some type of check if given sequence is correct. If not, the program crashes when
+# 	there is no sequence letter in table for match_score
 # 11. DO CLUSTALW
 # 12. FIX PAM250.txt and BLOSUM45.txt so they can be used
 # 13. add more examples for testing 
