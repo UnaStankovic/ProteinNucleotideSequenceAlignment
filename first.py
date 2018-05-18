@@ -17,7 +17,6 @@ def match_score(c1, c2, m, mm, letters, score_matrix):
 	print(mapped_values)
 	a = mapped_values[c1]
 	b = mapped_values[c2]
-	print(a, b)
 	return score_matrix[a][b]
 
 def global_alignment(first, second, letters, matrix):

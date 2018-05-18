@@ -12,8 +12,7 @@ def file_chooser():
 		return name
 
 def match_mis_gap_chooser(opt):
-	print("Do you want to manually choose values for match, mismatch and gap? \
-		(If you've chosen to use BLAST or TTM matrix only gap value will be applied.)")
+	print("Do you want to manually choose values for match, mismatch and gap?")
 	m = input()
 	if m not in {"yes","y","no","n"}:
 		print("Invalid answer.Try again.")

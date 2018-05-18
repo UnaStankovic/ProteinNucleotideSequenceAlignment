@@ -31,7 +31,7 @@
 # 13. add more examples for testing 
 # 14. add in local alignment visual representation of alignment - backtrack
 # 15. Add/ remove printfs 
-
+# 16. Fix options 2 and 3 to allow user to use custom matrix 
 import first, second, third, utilities
 from screens import screen
 
