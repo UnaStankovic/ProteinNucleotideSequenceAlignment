@@ -53,19 +53,18 @@ def sequence_input_check(allowed):
 		return sequence_input_check(allowed)
 	elif a == "1":
 		print("Enter file name:")
-		data = input()
-		if(data.find('.txt') == -1):
+		filename = input()
+		if(filename.find('.txt') == -1):
 			print("Not a valid option. Try again.")
 			return sequence_chooser(allowed)
 		else:
-			data = data.read()
-			return data.upper()
+			sequence = file_opener(filename)
+			return sequence.upper()
 	else:
-		print("Insert sequence:")
+		print("Insert sequence made out of following letters:" + str(allowed))
 		sequence = input()
 		sequence = sequence.upper()
 		print(sequence)
-		print(allowed)
 		for i in range(len(sequence)):
 			if sequence[i] not in allowed:
 				print("Invalid sequence.Try again.")
