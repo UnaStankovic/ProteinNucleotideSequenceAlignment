@@ -12,9 +12,9 @@ from matrices import custom_matrix, premade_score, matrix_chooser
 def match_score(c1, c2, m, mm, letters, score_matrix):
 	mapped_values = {}
 	for i, v in enumerate(letters):
-		print(i,v)
+		#print(i,v)
 		mapped_values[v] = i
-	print(mapped_values)
+	#print(mapped_values)
 	a = mapped_values[c1]
 	b = mapped_values[c2]
 	return score_matrix[a][b]

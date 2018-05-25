@@ -7,17 +7,17 @@ def given_matrices_inserter(filename):
 		dimensions = data.readline()
 		n = int(dimensions)
 		letters = data.readline()
+		letters = letters.replace('\n', '')
+		letters_arr = letters.split(' ')
+		print(letters_arr)
 		score_matrix = np.zeros((n,n))
 		for i in range(0,n):
 			arr = data.readline().split(" ")
 			for j in range(0,n):
+				print(arr[j])
 				score_matrix[i][j] = arr[j]
-		filen = filename.strip(".txt")
-		print(filen + " matrix:")
+		print("Chosen matrix:")
 		print(score_matrix)
-		letters = letters.replace('\n', '')
-		letters_arr = letters.split(' ')
-		print(letters_arr)
 		return letters_arr, score_matrix
 	except FileNotFoundError:
 		print("There is no matrix file.")
@@ -40,7 +40,7 @@ def input_matrix():
 	input_arr = input().split()
 	n = int(input_arr[0])
 	letters = input_arr[1:]
-	score_matrix = np.zeros((n, n)) # which matrix should be filled here?
+	score_matrix = np.zeros((n, n))
 	for i in range(n):
 		score_matrix[i] = input().split()
 	return letters, score_matrix

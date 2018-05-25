@@ -27,10 +27,10 @@
 # DONE - 10. Fix thrid file function calls (now second file), there should be some type of check if given sequence is correct. If not, the program crashes when
 # 	there is no sequence letter in table for match_score
 # 11. DO CLUSTALW
-# 12. FIX PAM250.txt and BLOSUM45.txt so they can be used - REMOVE EXTRA SPACES 
+# 12. ASAP!!!!!FIX PAM250.txt and BLOSUM45.txt so they can be used - REMOVE EXTRA SPACES, CONVERSION PROBLEM SPOTTED 
 # 13. add more examples for testing 
 # 14. add in local alignment visual representation of alignment - backtrack
-# 15. Add/ remove printfs 
+# 15. Add/ remove unneccessary printfs 
 # 16. Fix options 2 and 3 to allow user to use custom matrix 
 import first, second, third, utilities
 from screens import screen
