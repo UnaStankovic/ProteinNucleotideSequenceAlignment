@@ -31,15 +31,14 @@ def alignment_chooser(opt):
 		else:
 			print(local_alignment(first, second, letters, matrix))
 	elif opt == '3':
-		letters, matrix = given_matrices_inserter(file_chooser())
 		print("Insert sequences for alignment:")
-		first = sequence_input_check(letters)
-		second = sequence_input_check(letters)
-		first, second = protein_nucleotide_alignment(first, second)
+		first = input().upper()
+		second = input().upper()
+		first, second, letters, matrix = protein_nucleotide_alignment(first, second)
 		if a in ["G", "g"]:
-			return global_alignment(first, second, letters, matrix)
+			print(global_alignment(first, second, letters, matrix))
 		else:
-			return local_alignment(first, second, letters, matrix)
+			print(local_alignment(first, second, letters, matrix))
 
 def option_chooser(opt):
 	valid = set(['1','2','3','4','5'])

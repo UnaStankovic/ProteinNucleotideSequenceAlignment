@@ -3,7 +3,7 @@ import numpy as np
 
 #CHOOSERS
 def file_chooser():
-	print("Insert filename ex. blast.txt")
+	print("Insert filename")
 	name = input()
 	if(name.find('.txt') == -1):
 		print("Not a valid option. Try again.")

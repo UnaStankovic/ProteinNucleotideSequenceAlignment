@@ -14,16 +14,16 @@ def protein_nucleotide_alignment(first, second):
 	s = protein_or_nucleotide(second)
 	if f == -1 and s == -1:
 		print("Both proteins.")
-		return first, second
+		return first, second, letters, matrix 
 	elif f == -1 and s != -1:
 		return first, s
 	elif s == -1 and f != -1:
-		return f, second
+		return f, second, letters, matrix 
 	else:
 		print(first)
 		print(second)
 		print("Both nucleotides. You should have chosen option 1 at the beginning.")
-		return f, s
+		return f, s, letters, matrix 
 	
 def protein_or_nucleotide(sequence):
 	p = 0
