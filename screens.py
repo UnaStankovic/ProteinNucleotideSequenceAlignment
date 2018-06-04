@@ -1,9 +1,10 @@
 #This file contains option choosers and other screen settings
-import numpy as np 
+import numpy as np
 from utilities import file_chooser, sequence_input_check
 from first import global_alignment, local_alignment
 from matrices import given_matrices_inserter
 from second import protein_nucleotide_alignment
+from third import clustalw
 
 def alignment_chooser(opt):
 	print("For global alignment type G, for local L:")
@@ -49,7 +50,7 @@ def option_chooser(opt):
 		return alignment_chooser(opt)
 	elif opt == '4':
 		print("Option 4")
-		given_matrices_inserter(file_chooser())
+		clustalw(file_chooser())
 	else:
 		exit()
 
