@@ -1,18 +1,85 @@
 #This file contains alignment of multiple sequences using CLUSTALW algorithm.
 # By default we are using Neighbour Joining algorithm for clustering.
-# Gap opening penalty - the default value for nucleotide sequences is 15.0, the default value for amino acid sequences is 10.0.
-# Gap extension penalty - the default value for nucleotide sequences is 6.66, the default value for amino acid sequences is 0.2.
-# Maximum number of iterations - the default value is 16. In the original ClustalW implementation, this parameter is called numiters.
 import sys
 import getopt
 import numpy as np
 import collections
+from utilities import sequence_input_check, input_check
+from first import global_alignment
+from matrices import custom_matrix, premade_score, matrix_chooser
+from first import match_score
+
 
 It = collections.Iterable
 letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 digits = '0123456789'
 node_dict = dict()
 letter_dict = dict()
+order_of_alignment = list()
+
+def global_alignment_clustalw(first, second, letters, matrix, match, mismatch, gap):
+	if matrix.all() == 0:
+		letters, matrix = matrix_chooser(letters, match, mismatch)
+	n = len(first)
+	m = len(second)
+	backtrack = [[(-1,1) for j in range(m+1)] for i in range(n+1)]
+	s = [[0 for j in range(m+1)] for i in range(n+1)]
+
+	for i in range(1, n+1):
+		s[i][0] = s[i-1][0] + gap
+		backtrack[i][0] = (i-1, 0)
+	for j in range(1, m+1):
+		s[0][j] = s[0][j-1] + gap
+		backtrack[0][j] = (0, j-1)
+
+	for i in range(1, n+1):
+		for j in range(1, m+1):
+			s[i][j] = max(s[i-1][j] + gap, s[i][j-1] + gap, s[i-1][j-1] + match_score(first[i-1], second[j-1], match, mismatch, letters, matrix))
+			if s[i][j] == s[i-1][j] + gap:
+				backtrack[i][j] = (i-1, j)
+			elif s[i][j] == s[i][j-1] + gap:
+				backtrack[i][j] = (i, j-1)
+			else:
+				backtrack[i][j] =  (i-1, j-1)
+
+	first_p = ""
+	second_p = ""
+	i = n
+	j = m
+	while (i,j) != (0,0):
+		if backtrack[i][j] == (i-1, j-1):
+			first_p = first[i-1] + first_p
+			second_p = second[j-1] + second_p
+		elif backtrack[i][j] == (i-1, j):
+			first_p = first[i-1] + first_p
+			second_p = '-' + second_p
+		else:
+			first_p = '-' + first_p
+			second_p = second[j-1] + second_p
+		(i, j) = backtrack[i][j]
+
+	print(first_p)
+	print(second_p)
+	return s[n][m]
+
+def match_mis_gap_chooser():
+	print("Do you want to manually choose values for match, mismatch and gap?")
+	m = input()
+	if m not in {"yes","y","no","n"}:
+		print("Invalid answer.Try again.")
+		return match_mis_gap_chooser(opt)
+	elif m in {"yes","y"}:
+		print("Match:")
+		match = input_check()
+		print("Mismatch:")
+		mismatch = input_check()
+		print("Gap:")
+		gap = input_check()
+	else:
+		match = 5
+		mismatch = -1
+		gap = -2
+	return match, mismatch, gap
 
 def map_letters_to_seq(input_seqs):
     num_of_seqs = len(input_seqs)
@@ -149,8 +216,8 @@ def one_round(A,otus,count):
     # print()
     return A,otus
 
-
 def build_tree(distance_matrix):
+
 	# fn = filename
 	# data = load_data(fn,split_lines=True)
     N = len(distance_matrix)
@@ -174,11 +241,10 @@ def build_tree(distance_matrix):
   # print()
 
     node_t = -1
-    print("Printint final results:")
-    print()
+    # print("Printint final results:")
+    # print()
     kL = ['L','dL','R','dR','up','d_up']
     for node in sorted(node_dict.keys()):
-        print(node, ':   ')
         for k in kL:
             nD = node_dict[node]
             if not k in nD:
@@ -186,18 +252,31 @@ def build_tree(distance_matrix):
             v = nD[k]
 			# if k in ['dL','dR']:
 			# 	v = '%3.3f' % v
-			# if (str(v).isalpha()):
-            node_t *= -1
-            if (node_t == 1):
-                print(v, ' ')
+            if (str(v).isalpha()):
+                order_of_alignment.append(str(v))
+                # print(v, ' ')
         print()
+    multiple_alignment()
 
-def main():
-    input_seqs = ["ACGTAGGCCT", "ATGTAAGACT", "TCGAGAGCAC", "TCGAAAGCAT"]
-    # print('Distance matrix: \n')
-    # print(calculate_distance_matrix(input_seqs))
+def multiple_alignment():
+    letters_actg = ['A','C','T','G']
+    seq_len = len(order_of_alignment)
+    first = letter_dict[order_of_alignment[0]]
+    second = letter_dict[order_of_alignment[1]]
+    matrix_tmp = np.zeros((len(letters_actg), len(letters_actg)))
+    match, mismatch, gap = match_mis_gap_chooser()
+    tmp_result = global_alignment_clustalw(first, second, letters_actg, matrix_tmp, match, mismatch, gap)
+    for i in range(2, seq_len):
+        second = letter_dict[order_of_alignment[i]]
+        tmp_result = global_alignment_clustalw(tmp_result, second, letters_actg, matrix_tmp, match, mismatch, gap)
+    return tmp_result
+
+def clustalw(filename):
+    input_seqs = list()
+    with open(filename) as openfileobject:
+        for line in openfileobject:
+            line = line.replace('\n', '')
+            input_seqs.append(line)
+    # print(input_seqs)
     map_letters_to_seq(input_seqs)
     build_tree(calculate_distance_matrix(input_seqs))
-
-if __name__ == "__main__":
-        main()
