@@ -8,17 +8,16 @@ import getopt
 import numpy as np
 import collections
 
-# def ClustalW(inputSeqs, gapOpening="default",
-#                 gapExtension="default", maxiters="default",
-#                 substitutionMatrix="default"):
-# {
-#
-# }
-
 It = collections.Iterable
 letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 digits = '0123456789'
 node_dict = dict()
+letter_dict = dict()
+
+def map_letters_to_seq(input_seqs):
+    num_of_seqs = len(input_seqs)
+    for i in range(num_of_seqs):
+        letter_dict[letters[i]] = input_seqs[i]
 
 def calculate_distance_matrix(input_seqs):
     length = len(input_seqs)
@@ -151,53 +150,54 @@ def one_round(A,otus,count):
     return A,otus
 
 
-def build_tree(filename) :
-	fn = filename
-	data = load_data(fn,split_lines=True)
-	N = len(data)
-	A = list()
-	for line in data:
-		A.append([float(n) for n in line.split()])
-	otus = list(letters[:N])
-	A = np.array(A)
-	A.shape = (N,N)
+def build_tree(distance_matrix):
+	# fn = filename
+	# data = load_data(fn,split_lines=True)
+    N = len(distance_matrix)
+	# A = list()
+	# for line in data:
+	# 	A.append([float(n) for n in line.split()])
+    otus = list(letters[:N])
+	# A = np.array(A)
+	# A.shape = (N,N)
 	# print(A)
+    A = distance_matrix
+    count = 0
 
-	count = 0
-
-	while True:
+    while True:
 	# print('round', count)
-		A,otus = one_round(A,otus,count)
-		if A is None:  break
-		count += 1
+        A,otus = one_round(A,otus,count)
+        if A is None:  break
+        count += 1
 	# print(A)
 	# print()
   # print()
 
-	node_t = -1
-	print("Printint final results:")
-	print()
-	kL = ['L','dL','R','dR','up','d_up']
-	for node in sorted(node_dict.keys()):
-		print(node, ':   ')
-		for k in kL:
-			nD = node_dict[node]
-			if not k in nD:
-				continue
-			v = nD[k]
+    node_t = -1
+    print("Printint final results:")
+    print()
+    kL = ['L','dL','R','dR','up','d_up']
+    for node in sorted(node_dict.keys()):
+        print(node, ':   ')
+        for k in kL:
+            nD = node_dict[node]
+            if not k in nD:
+                continue
+            v = nD[k]
 			# if k in ['dL','dR']:
 			# 	v = '%3.3f' % v
 			# if (str(v).isalpha()):
-			node_t *= -1
-			if (node_t == 1):
-				print(v, ' ')
-		print()
+            node_t *= -1
+            if (node_t == 1):
+                print(v, ' ')
+        print()
 
 def main():
     input_seqs = ["ACGTAGGCCT", "ATGTAAGACT", "TCGAGAGCAC", "TCGAAAGCAT"]
     # print('Distance matrix: \n')
     # print(calculate_distance_matrix(input_seqs))
-    build_tree('test.txt')
+    map_letters_to_seq(input_seqs)
+    build_tree(calculate_distance_matrix(input_seqs))
 
 if __name__ == "__main__":
         main()
