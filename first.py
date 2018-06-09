@@ -22,7 +22,7 @@ def match_score(c1, c2, m, mm, letters, score_matrix):
 def global_alignment(first, second, letters, matrix):
 	match, mismatch, gap, ind = match_mis_gap_chooser("g")
 	if ind == 0:
-		print("hi")
+		#print("hi")
 		letters, matrix = matrix_chooser(letters, match, mismatch)
 	n = len(first)
 	m = len(second)

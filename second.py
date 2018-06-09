@@ -12,6 +12,8 @@ from matrices import given_matrices_inserter
 def protein_nucleotide_alignment(first, second):
 	f = protein_or_nucleotide(first)
 	s = protein_or_nucleotide(second)
+	letters = set(list(first + second))
+	print(letters)
 	if f == -1 and s == -1:
 		print("Both proteins.")
 		return first, second, letters, matrix 

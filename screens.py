@@ -34,7 +34,9 @@ def alignment_chooser(opt):
 		print("Insert sequences for alignment:")
 		first = input().upper()
 		second = input().upper()
+		print(protein_nucleotide_alignment(first, second))
 		first, second, letters, matrix = protein_nucleotide_alignment(first, second)
+		
 		if a in ["G", "g"]:
 			print(global_alignment(first, second, letters, matrix))
 		else:
