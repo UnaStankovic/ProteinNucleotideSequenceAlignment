@@ -17,22 +17,25 @@ def match_mis_gap_chooser(opt):
 	if m not in {"yes","y","no","n"}:
 		print("Invalid answer.Try again.")
 		return match_mis_gap_chooser(opt)
-	elif m in {"yes","y"}:
+	if m in {"yes","y"}:
 		print("Match:")
 		match = input_check()
 		print("Mismatch:")
 		mismatch = input_check()
 		print("Gap:")
 		gap = input_check()
+		ind = 1
 	elif opt == "g":
 		match = 5
 		mismatch = -1
 		gap = -2
-	else:
+		ind = 0
+	elif opt == "l":
 		match = 1
 		mismatch = -1
 		gap = -1
-	return match, mismatch, gap
+		ind = 0
+	return match, mismatch, gap, ind
 
 #INPUT CHECKS
 def input_check():
