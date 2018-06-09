@@ -25,6 +25,7 @@ def match_mis_gap_chooser(opt):
 		print("Gap:")
 		gap = input_check()
 		ind = 1
+		return match, mismatch, gap, ind
 	elif opt == "g":
 		match = 5
 		mismatch = -1
