@@ -18,6 +18,7 @@ letter_dict = dict()
 order_of_alignment = list()
 
 def global_alignment_clustalw(first, second, letters, matrix, match, mismatch, gap):
+	print('We are aligning: ', first, ' and ', second)
 	if matrix.all() == 0:
 		letters, matrix = matrix_chooser(letters, match, mismatch)
 	n = len(first)
@@ -58,9 +59,9 @@ def global_alignment_clustalw(first, second, letters, matrix, match, mismatch, g
 			second_p = second[j-1] + second_p
 		(i, j) = backtrack[i][j]
 
-	print(first_p)
-	print(second_p)
-	return s[n][m]
+	# print(first_p)
+	# print(second_p)
+	return second_p
 
 def match_mis_gap_chooser():
 	print("Do you want to manually choose values for match, mismatch and gap?")
@@ -197,11 +198,11 @@ def build_tree(distance_matrix):
             v = nD[k]
             if (str(v).isalpha()):
                 order_of_alignment.append(str(v))
-        print()
-    multiple_alignment()
+    print('The order of alignment is: ', order_of_alignment)
+    print(multiple_alignment())
 
 def multiple_alignment():
-    letters_actg = ['A','C','T','G']
+    letters_actg = ['A','C','T','G', '-']
     seq_len = len(order_of_alignment)
     first = letter_dict[order_of_alignment[0]]
     second = letter_dict[order_of_alignment[1]]
@@ -219,6 +220,6 @@ def clustalw(filename):
         for line in openfileobject:
             line = line.replace('\n', '')
             input_seqs.append(line)
-    # print(input_seqs)
+    print('The sequences are: ', input_seqs)
     map_letters_to_seq(input_seqs)
     build_tree(calculate_distance_matrix(input_seqs))
