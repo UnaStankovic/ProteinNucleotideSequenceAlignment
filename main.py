@@ -18,7 +18,7 @@
 # DONE - removed global vars 1. to reduce global variables to just one score matrix and one given
 # DONE - added to settings file 2. to move global variables to one global conf = {}
 # DONE - added input matrix function 3. Add custom matrix input format for nucleotide and protein - this might be useless since the num of letters and matrix for proteins is too big
-# 4. fix letter reading - spaces, newlines - regex from file
+# DONE - written script.py 4. fix letter reading - spaces, newlines - regex from file
 # DONE - all should be reduced to minumum by now 5. possibly reduce more functions
 # DONE - made minimal, renamed functions 6. option and alignment chooser to be reduced or rewritten a lot of repetetive code in there right now
 # DONE - match_score function rewritten 7. in match_score function to reduce 2 GIVEN options to one by sending letters for nucleotides
@@ -30,8 +30,8 @@
 # DONE/FIXED - 12. ASAP!!!!!FIX PAM250.txt and BLOSUM45.txt so they can be used - REMOVE EXTRA SPACES(DONE), CONVERSION PROBLEM SPOTTED 
 # DONE - 13. add more examples for testing 
 # NOT GOING TO BE DONE - 14. add in local alignment visual representation of alignment - backtrack
-# 15. Add/ remove unneccessary printfs 
-# 16. Fix options 2 and 3 to disallow user to use custom matrix 
+# DONE - 15. Add/ remove unneccessary printfs 
+# DONE - 16. Fix options 2 and 3 to disallow user to use custom matrix 
 # 17. Check if local alignment really works some bugs noticed
 import first, second, third, utilities
 from screens import screen

@@ -34,12 +34,16 @@ def alignment_chooser(opt):
 		else:
 			print(local_alignment(first, second, letters, matrix, protein))
 	elif opt == '3':
-		print("Insert sequences for alignment (Sequence must contain ATG):")
+		protein = 1
+		letters, matrix = given_matrices_inserter(file_chooser())
+		print("Insert sequences for alignment (If nucleotide, sequence must contain ATG, if protein must be made of ):" + str(letters))
 		first = input().upper()
 		second = input().upper()
-		print(protein_nucleotide_alignment(first, second))
-		first, second, letters, matrix = protein_nucleotide_alignment(first, second)
-		
+		first, second, letters1 = protein_nucleotide_alignment(first, second)
+		for letter in letters1:
+			if letter not in letters:
+				print("Invalid sequences. Some letters not found in protein score matrix.")
+				exit()
 		if a in ["G", "g"]:
 			print(global_alignment(first, second, letters, matrix, protein))
 		else:

@@ -10,23 +10,21 @@ from matrices import given_matrices_inserter
 
 #actually alignment of two proteins 
 def protein_nucleotide_alignment(first, second):
+	letters = set(list(first + second))
 	f = protein_or_nucleotide(first)
 	s = protein_or_nucleotide(second)
-	letters = set(list(first + second))
-	matrix = np.zeros((len(first),len(second)))
-	print(letters)
 	if f == -1 and s == -1:
 		print("Both proteins.")
-		return first, second, letters, matrix 
+		return first, second, letters
 	elif f == -1 and s != -1:
 		return first, s
 	elif s == -1 and f != -1:
-		return f, second, letters, matrix 
+		return f, second, letters
 	else:
 		print(first)
 		print(second)
 		print("Both nucleotides. You should have chosen option 1 at the beginning.")
-		return f, s, letters, matrix 
+		return f, s, letters
 	
 def protein_or_nucleotide(sequence):
 	p = 0
