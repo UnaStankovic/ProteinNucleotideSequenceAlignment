@@ -13,16 +13,15 @@ def given_matrices_inserter(filename):
 		letters = data.readline()
 		letters = letters.replace('\n', '')
 		letters_arr = letters.split(' ')
-		print(letters_arr)
+		#print(letters_arr)
 		score_matrix = np.zeros((n,n))
 		for i in range(0,n):
 			arr = data.readline().split(" ")
-			#print(arr)
 			for j in range(0,n):
 				#print(arr[j])
 				score_matrix[i][j] = float(arr[j])
-		print("Chosen matrix:")
-		print(score_matrix)
+		#print("Chosen matrix:")
+		#print(score_matrix)
 		return letters_arr, score_matrix
 	except FileNotFoundError:
 		print("There is no matrix file.")
