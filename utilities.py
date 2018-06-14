@@ -59,10 +59,16 @@ def sequence_input_check(allowed):
 		filename = input()
 		if(filename.find('.txt') == -1):
 			print("Not a valid option. Try again.")
-			return sequence_chooser(allowed)
+			return sequence_input_check(allowed)
 		else:
 			sequence = file_opener(filename)
-			return sequence.upper()
+			sequence = sequence.upper()
+			print(sequence)
+			for i in range(len(sequence)):
+				if sequence[i] not in allowed:
+					print("Invalid sequence.Try again.")
+					return sequence_input_check(allowed)
+			return sequence
 	else:
 		print("Insert sequence made out of following letters:" + str(allowed))
 		sequence = input()

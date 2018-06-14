@@ -79,9 +79,9 @@ def premade_score(letters, match, mismatch):
 		elif m in {"no", "n"}:
 			return fill_matrix(letters, match, mismatch)
 		elif m in blosum:
-			return given_matrices_inserter("blosum45.txt")
+			return given_matrices_inserter("matrices/blosum45.txt")
 		else: 
-			return given_matrices_inserter("pam250.txt")
+			return given_matrices_inserter("matrices/pam250.txt")
 	else:
 		print("Do you want to use BLAST(B), Transition-Transvertion Matrix(TTM) or none?")
 		m = input()
@@ -91,9 +91,9 @@ def premade_score(letters, match, mismatch):
 		elif m in {"no", "n"}:
 			return fill_matrix(letters, match, mismatch)
 		elif m in {"B","b"}:
-			return given_matrices_inserter("blast.txt")
+			return given_matrices_inserter("matrices/blast.txt")
 		else:
-			return given_matrices_inserter("ttm.txt")
+			return given_matrices_inserter("matrices/ttm.txt")
 	
 def matrix_chooser(letters, match, mismatch):
 	print("Do you want to use custom score matrix? yes/no")
