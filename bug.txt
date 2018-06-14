@@ -1,0 +1,38 @@
+3
+For global alignment type G, for local L:
+l
+Insert filename
+matrices/pam250.txt
+Insert sequences for alignment:
+(If nucleotide, sequence must contain ATG)
+Enter 1 for a file name or 2 for DNA/protein sequence:
+1
+Enter file name:
+tests/3_protein.txt
+GAVLIMXCST
+Enter 1 for a file name or 2 for DNA/protein sequence:
+1
+Enter file name:
+tests/3_nucleotide.txt
+ATGCATCAGCATACGACTCAG
+hi
+Sequence2 : GAVLIMXCST
+Protein.
+Sequence1 : ATGCATCAGCATACGACTCAG
+Nucleotide. It will be translated into aminoacid.
+Do you want to have RNA info written in a file?
+no
+DNA to RNA transcription completed.
+MHQHTTQ
+Traceback (most recent call last):
+  File "main.py", line 44, in <module>
+    main()
+  File "main.py", line 41, in main
+    screen()
+  File "/home/una/Desktop/matf/Master/2 godina/Drugi semestar/BIO/ProteinNucleotideSequenceAlignment/screens.py", line 67, in screen
+    return option_chooser(option)
+  File "/home/una/Desktop/matf/Master/2 godina/Drugi semestar/BIO/ProteinNucleotideSequenceAlignment/screens.py", line 52, in option_chooser
+    return alignment_chooser(opt)
+  File "/home/una/Desktop/matf/Master/2 godina/Drugi semestar/BIO/ProteinNucleotideSequenceAlignment/screens.py", line 36, in alignment_chooser
+    first, second, letters1 = protein_nucleotide_alignment(first, second)
+ValueError: not enough values to unpack (expected 3, got 2)

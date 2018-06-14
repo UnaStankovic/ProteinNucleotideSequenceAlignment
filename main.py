@@ -34,6 +34,7 @@
 # DONE - 16. Fix options 2 and 3 to disallow user to use custom matrix 
 # 17. Check if local alignment really works some bugs noticed
 # 18. Make easy matrix choice. 
+# 19. FIX THE BUG OUTPUT IN FILE bug.txt
 import first, second, third, utilities
 from screens import screen
 

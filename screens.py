@@ -23,38 +23,32 @@ def alignment_chooser(opt):
 			print(global_alignment(first, second, letters, matrix, protein))
 		else:
 			print(local_alignment(first, second, letters, matrix, protein))
-	elif opt == '2':
+	elif opt in ['2', '3']:
 		protein = 1
 		letters, matrix = given_matrices_inserter(file_chooser())
 		print("Insert sequences for alignment:")
+		if opt == '3':
+			print("(If nucleotide, sequence must contain ATG)")
 		first = sequence_input_check(letters)
 		second = sequence_input_check(letters)
+		if opt == '3':
+			print("hi")
+			first, second, letters1 = protein_nucleotide_alignment(first, second)
+			for letter in letters1:
+				if letter not in letters:
+					print("Invalid sequences. Some letters not found in protein score matrix.")
+					exit()
 		if a in ["G", "g"]:
 			print(global_alignment(first, second, letters, matrix, protein))
 		else:
 			print(local_alignment(first, second, letters, matrix, protein))
-	elif opt == '3':
-		protein = 1
-		letters, matrix = given_matrices_inserter(file_chooser())
-		#print("Insert sequences for alignment (If nucleotide, sequence must contain ATG, if protein must be made of ):" + str(letters))
-		first = sequence_input_check(letters)
-		second = sequence_input_check(letters)
-		first, second, letters1 = protein_nucleotide_alignment(first, second)
-		for letter in letters1:
-			if letter not in letters:
-				print("Invalid sequences. Some letters not found in protein score matrix.")
-				exit()
-		if a in ["G", "g"]:
-			print(global_alignment(first, second, letters, matrix, protein))
-		else:
-			print(local_alignment(first, second, letters, matrix, protein))
-
+			
 def option_chooser(opt):
 	valid = set(['1','2','3','4','5'])
 	if opt not in valid:
 		print("Not a valid option. Try again.")
 		return screen()
-	elif opt in ["1","2", "3"]:
+	elif opt in ["1","2","3"]:
 		return alignment_chooser(opt)
 	elif opt == '4':
 		print("Option 4")
