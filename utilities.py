@@ -70,7 +70,7 @@ def sequence_input_check(allowed):
 					return sequence_input_check(allowed)
 			return sequence
 	else:
-		print("Insert sequence made out of following letters:" + str(allowed))
+		print("Insert sequences for alignment (If nucleotide, sequence must contain ATG, if protein must be made of ): \n" + str(allowed))
 		sequence = input()
 		sequence = sequence.upper()
 		print(sequence)

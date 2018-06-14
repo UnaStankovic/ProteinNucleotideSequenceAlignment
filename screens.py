@@ -36,9 +36,9 @@ def alignment_chooser(opt):
 	elif opt == '3':
 		protein = 1
 		letters, matrix = given_matrices_inserter(file_chooser())
-		print("Insert sequences for alignment (If nucleotide, sequence must contain ATG, if protein must be made of ):" + str(letters))
-		first = input().upper()
-		second = input().upper()
+		#print("Insert sequences for alignment (If nucleotide, sequence must contain ATG, if protein must be made of ):" + str(letters))
+		first = sequence_input_check(letters)
+		second = sequence_input_check(letters)
 		first, second, letters1 = protein_nucleotide_alignment(first, second)
 		for letter in letters1:
 			if letter not in letters:
