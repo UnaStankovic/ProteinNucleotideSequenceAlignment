@@ -5,7 +5,11 @@ def given_matrices_inserter(filename):
 	try:	
 		data = open(filename, 'r')
 		dimensions = data.readline()
-		n = int(dimensions)
+		try:
+			n = int(dimensions)
+		except ValueError:
+			print("Wrong file")
+			exit()
 		letters = data.readline()
 		letters = letters.replace('\n', '')
 		letters_arr = letters.split(' ')

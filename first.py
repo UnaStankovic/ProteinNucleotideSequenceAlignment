@@ -19,9 +19,9 @@ def match_score(c1, c2, m, mm, letters, score_matrix):
 	b = mapped_values[c2]
 	return score_matrix[a][b]
 
-def global_alignment(first, second, letters, matrix):
+def global_alignment(first, second, letters, matrix, protein):
 	match, mismatch, gap, ind = match_mis_gap_chooser("g")
-	if ind == 0:
+	if ind == 0 and protein == 0:
 		#print("hi")
 		letters, matrix = matrix_chooser(letters, match, mismatch)
 	n = len(first)
@@ -66,9 +66,9 @@ def global_alignment(first, second, letters, matrix):
 	print(second_p)
 	return s[n][m]
 
-def local_alignment(first, second, letters, matrix):
+def local_alignment(first, second, letters, matrix, protein):
 	match, mismatch, gap, ind = match_mis_gap_chooser("l")
-	if ind == 0:
+	if ind == 0 and protein == 0:
 		letters, matrix = matrix_chooser(letters, match, mismatch)
 	#print(match, mismatch, gap)
 	local_alignment = [[0 for j in range(len(second) + 1)] for i in range(len(first) + 1)]

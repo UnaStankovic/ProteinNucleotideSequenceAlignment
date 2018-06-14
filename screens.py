@@ -9,6 +9,7 @@ from third import clustalw
 def alignment_chooser(opt):
 	print("For global alignment type G, for local L:")
 	a = input()
+	protein = 0
 	if a not in ["L","G", "l", "g"]:
 		print("Not a valid option. Try again.")
 		return alignment_chooser(opt)
@@ -19,29 +20,30 @@ def alignment_chooser(opt):
 		second = sequence_input_check(letters)
 		matrix = np.zeros((len(letters), len(letters)))
 		if a in ["G", "g"]:
-			print(global_alignment(first, second, letters, matrix))
+			print(global_alignment(first, second, letters, matrix, protein))
 		else:
-			print(local_alignment(first, second, letters, matrix))
+			print(local_alignment(first, second, letters, matrix, protein))
 	elif opt == '2':
+		protein = 1
 		letters, matrix = given_matrices_inserter(file_chooser())
 		print("Insert sequences for alignment:")
 		first = sequence_input_check(letters)
 		second = sequence_input_check(letters)
 		if a in ["G", "g"]:
-			print(global_alignment(first, second, letters, matrix))
+			print(global_alignment(first, second, letters, matrix, protein))
 		else:
-			print(local_alignment(first, second, letters, matrix))
+			print(local_alignment(first, second, letters, matrix, protein))
 	elif opt == '3':
-		print("Insert sequences for alignment:")
+		print("Insert sequences for alignment (Sequence must contain ATG):")
 		first = input().upper()
 		second = input().upper()
 		print(protein_nucleotide_alignment(first, second))
 		first, second, letters, matrix = protein_nucleotide_alignment(first, second)
 		
 		if a in ["G", "g"]:
-			print(global_alignment(first, second, letters, matrix))
+			print(global_alignment(first, second, letters, matrix, protein))
 		else:
-			print(local_alignment(first, second, letters, matrix))
+			print(local_alignment(first, second, letters, matrix, protein))
 
 def option_chooser(opt):
 	valid = set(['1','2','3','4','5'])

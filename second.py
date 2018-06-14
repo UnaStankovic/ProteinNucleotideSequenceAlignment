@@ -8,11 +8,12 @@ from utilities import file_opener, rna_file_writer, file_chooser
 from first import global_alignment, local_alignment
 from matrices import given_matrices_inserter
 
-#actually alignment of two proteins of which one or both are to be translated into aminoacids if this option is chosen
+#actually alignment of two proteins 
 def protein_nucleotide_alignment(first, second):
 	f = protein_or_nucleotide(first)
 	s = protein_or_nucleotide(second)
 	letters = set(list(first + second))
+	matrix = np.zeros((len(first),len(second)))
 	print(letters)
 	if f == -1 and s == -1:
 		print("Both proteins.")

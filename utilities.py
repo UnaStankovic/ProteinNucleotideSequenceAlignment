@@ -100,7 +100,7 @@ def rna_file_writer(content):
 	elif answer in ["Yes","y", "yes"]: 
 		print("Insert file name:")
 		filename = input()
-		filename.append(".txt")
+		filename = filename + ".txt"
 		print(filename)
 		rna = open(filename, 'w')
 		rna.write(content)
