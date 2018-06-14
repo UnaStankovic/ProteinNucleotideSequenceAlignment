@@ -70,7 +70,7 @@ def local_alignment(first, second, letters, matrix):
 	match, mismatch, gap, ind = match_mis_gap_chooser("l")
 	if ind == 0:
 		letters, matrix = matrix_chooser(letters, match, mismatch)
-	print(match, mismatch, gap)
+	#print(match, mismatch, gap)
 	local_alignment = [[0 for j in range(len(second) + 1)] for i in range(len(first) + 1)]
 
 	for i in range(len(first) + 1):
