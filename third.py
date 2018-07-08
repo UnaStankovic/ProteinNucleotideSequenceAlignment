@@ -16,6 +16,7 @@ digits = '0123456789'
 node_dict = dict()
 letter_dict = dict()
 order_of_alignment = list()
+aligned_arrays = list()
 
 def global_alignment_clustalw(first, second, letters, matrix, match, mismatch, gap):
 	print('We are aligning: ', first, ' and ', second)
@@ -199,7 +200,11 @@ def build_tree(distance_matrix):
             if (str(v).isalpha()):
                 order_of_alignment.append(str(v))
     print('The order of alignment is: ', order_of_alignment)
-    print(multiple_alignment())
+    multiple_alignment()
+    print('\nAligned arrays: ')
+    for i in range(0, len(aligned_arrays)):
+        print(aligned_arrays[i])
+    # print(aligned_arrays)
 
 def multiple_alignment():
     letters_actg = ['A','C','T','G', '-']
@@ -209,9 +214,13 @@ def multiple_alignment():
     matrix_tmp = np.zeros((len(letters_actg), len(letters_actg)))
     match, mismatch, gap = match_mis_gap_chooser()
     tmp_result = global_alignment_clustalw(first, second, letters_actg, matrix_tmp, match, mismatch, gap)
+    print('Pairwise alignment result: ', tmp_result)
+    aligned_arrays.append(tmp_result)
     for i in range(2, seq_len):
         second = letter_dict[order_of_alignment[i]]
         tmp_result = global_alignment_clustalw(tmp_result, second, letters_actg, matrix_tmp, match, mismatch, gap)
+        print('Pairwise alignment result: ', tmp_result)
+        aligned_arrays.append(tmp_result)
     return tmp_result
 
 def clustalw(filename):
