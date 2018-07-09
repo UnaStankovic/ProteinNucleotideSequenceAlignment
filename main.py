@@ -32,9 +32,11 @@
 # NOT GOING TO BE DONE - 14. add in local alignment visual representation of alignment - backtrack
 # DONE - 15. Add/ remove unneccessary printfs 
 # DONE - 16. Fix options 2 and 3 to disallow user to use custom matrix 
-# 17. Check if local alignment really works some bugs noticed
+# DONE -17. Check if local alignment really works some bugs noticed - it works! 
 # DONE - 18. Make easy matrix choice. 
-# DONE - 19. FIX THE BUG OUTPUT IN FILE bug.txt
+# DONE - 19. FIX THE BUG OUTPUT IN FILE bug.txt - fixed problem in ret val
+# 20. TODO: in 4 to be added: chooser if match mismatch and gap should be inserted once or for each alignment separately. remove matrix choosers from 4.
+
 import first, second, third, utilities
 from screens import screen
 
