@@ -17,7 +17,7 @@ def protein_nucleotide_alignment(first, second):
 		print("Both proteins.")
 		return first, second, letters
 	elif f == -1 and s != -1:
-		return first, s
+		return first, s, letters
 	elif s == -1 and f != -1:
 		return f, second, letters
 	else:
