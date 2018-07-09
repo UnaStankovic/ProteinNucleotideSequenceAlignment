@@ -69,7 +69,7 @@ def match_mis_gap_chooser():
 	m = input()
 	if m not in {"yes","y","no","n"}:
 		print("Invalid answer.Try again.")
-		return match_mis_gap_chooser(opt)
+		return match_mis_gap_chooser()
 	elif m in {"yes","y"}:
 		print("Match:")
 		match = input_check()

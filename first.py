@@ -77,7 +77,7 @@ def local_alignment(first, second, letters, matrix, protein):
 	for i in range(len(second) + 1):
 		local_alignment[0][i] = 0
 
-	for i in range(1, len(first) +1):
+	for i in range(1, len(first) + 1):
 		for j in range(1, len(second) + 1):
 			matcher = match_score(first[i-1], second[j-1], match, mismatch, letters, matrix)
 			if matcher < 0:

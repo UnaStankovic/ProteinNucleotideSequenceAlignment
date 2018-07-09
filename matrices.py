@@ -70,7 +70,7 @@ def premade_score(letters, match, mismatch):
 	blosum = {"blosum", "BLOSUM", "blosum45", "BLOSUM45"}
 	indicator = 0 #0 is for nucleotide 1 is for protein
 	for i in range(len(letters)):
-		if letters[i] not in ["A", "C", "G", "T"]:
+		if letters[i] not in ["A", "C", "G", "T", "-"]:
 			indicator = 1
 	
 	if indicator == 1:
