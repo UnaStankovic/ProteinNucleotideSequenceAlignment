@@ -17,11 +17,14 @@ node_dict = dict()
 letter_dict = dict()
 order_of_alignment = list()
 aligned_arrays = list()
+matrix_chooser_ind = 1
 
 def global_alignment_clustalw(first, second, letters, matrix, match, mismatch, gap):
 	print('We are aligning: ', first, ' and ', second)
-	if matrix.all() == 0:
+	global matrix_chooser_ind
+	if matrix.all() == 0 and matrix_chooser_ind == 1:
 		letters, matrix = matrix_chooser(letters, match, mismatch)
+		matrix_chooser_ind = 0
 	n = len(first)
 	m = len(second)
 	backtrack = [[(-1,1) for j in range(m+1)] for i in range(n+1)]
@@ -218,6 +221,7 @@ def multiple_alignment():
     aligned_arrays.append(tmp_result)
     for i in range(2, seq_len):
         second = letter_dict[order_of_alignment[i]]
+        match, mismatch, gap = match_mis_gap_chooser()
         tmp_result = global_alignment_clustalw(tmp_result, second, letters_actg, matrix_tmp, match, mismatch, gap)
         print('Pairwise alignment result: ', tmp_result)
         aligned_arrays.append(tmp_result)
